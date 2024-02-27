@@ -1,0 +1,66 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+entity User {
+    id
+    --
+    first_name
+    --
+    last_name
+    --
+    role
+    --
+    uid
+}
+
+entity Address {
+    id
+    --
+    city
+    --
+    street
+    --
+    house_number
+}
+
+entity Vendor {
+    id
+    --
+    company_name
+    --
+    phone_support_service
+}
+
+entity Station {
+    id
+    --
+   manager_id
+   --
+   vendor_id
+   --
+   address_id
+   --
+   station_state
+}
+
+entity ChargeSession {
+    id
+    --
+    user_id
+    --
+    station_id
+    --
+    start_time
+    --
+    stop_time
+    --
+    stop_reason
+}
+
+User -- Station
+User -- ChargeSession
+Address -- Station
+Vendor -- Station
+Station -- ChargeSession
+
+@enduml
