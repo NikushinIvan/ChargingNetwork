@@ -2,7 +2,9 @@
 'https://plantuml.com/sequence-diagram
 
 entity User {
-    id
+    user_id
+    --
+    username
     --
     first_name
     --
@@ -13,8 +15,24 @@ entity User {
     uid
 }
 
+entity User_password {
+    password_id
+    --
+    user_id
+    --
+    password
+}
+
+entity User_role {
+    role_id
+    --
+    user_id
+    --
+    role
+}
+
 entity Address {
-    id
+    address_id
     --
     city
     --
@@ -24,7 +42,7 @@ entity Address {
 }
 
 entity Vendor {
-    id
+    vendor_id
     --
     company_name
     --
@@ -32,8 +50,8 @@ entity Vendor {
 }
 
 entity Station {
-    id
-    --
+   station_id
+   --
    manager_id
    --
    vendor_id
@@ -44,7 +62,7 @@ entity Station {
 }
 
 entity ChargeSession {
-    id
+    session_id
     --
     user_id
     --
@@ -58,6 +76,8 @@ entity ChargeSession {
 }
 
 User -- Station
+User -- User_password
+User -- User_role
 User -- ChargeSession
 Address -- Station
 Vendor -- Station
