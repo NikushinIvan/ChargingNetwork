@@ -10,8 +10,6 @@ entity User {
     --
     last_name
     --
-    role
-    --
     uid
 }
 
@@ -61,7 +59,7 @@ entity Station {
    station_state
 }
 
-entity ChargeSession {
+entity Charge_session {
     session_id
     --
     user_id
@@ -78,9 +76,9 @@ entity ChargeSession {
 User -- Station
 User -- User_password
 User -- User_role
-User -- ChargeSession
+User -- Charge_session
 Address -- Station
 Vendor -- Station
-Station -- ChargeSession
+Station -- Charge_session
 
 @enduml
