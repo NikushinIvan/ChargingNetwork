@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" href="/css/styles.css">
+  <meta charset="UTF-8">
+  <title>Сеть ЭЗС</title>
+</head>
+<body>
+<div>
+  <h1>Создание пользователя</h1>
+  <form th:action="@{/user}" th:method="POST" th:object="${user}">
+    <div>
+      <input type="text" th:name="username" th:field="*{username}" placeholder="Логин">
+    </div>
+    <div>
+      <input type="text" th:name="password" th:field="*{password}" placeholder="Пароль", min="4">
+    </div>
+    <div>
+      <input type="text" th:name="firstName" th:field="*{firstName}" placeholder="Имя">
+    </div>
+    <div>
+      <input type="text" th:name="lastName" th:field="*{lastName}" placeholder="Фамилия">
+    </div>
+    <div>
+      <input type="text" th:name="uid" th:field="*{uid}" placeholder="UID RFID карты" minlength="8" maxlength="8">
+    </div>
+    <button type="submit">Создать!</button><br/>
+  </form>
+  <a th:href="@{/user}">К списку пользователей</a>
+</div>
+</body>
+</html>

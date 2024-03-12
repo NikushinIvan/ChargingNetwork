@@ -1,0 +1,46 @@
+package sber.school.ChargingNetwork.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import sber.school.ChargingNetwork.service.RoleService;
+import sber.school.ChargingNetwork.service.UserService;
+
+@Controller
+@RequestMapping("role")
+public class RoleController {
+
+    private final RoleService roleService;
+    private final UserService userService;
+
+    public RoleController(RoleService roleService, UserService userService) {
+        this.roleService = roleService;
+        this.userService = userService;
+    }
+
+    @GetMapping("/{id}")
+    public String showUpdateUserRolePage(@PathVariable int id, Model model) {
+        var user = userService.getUserById(id);
+        model.addAttribute("user", user);
+        model.addAttribute("roles", roleService.excludeRepeatRoles(user.getRoles()));
+        return "/role/updateUserRole";
+    }
+
+    @DeleteMapping("/{userId}/{roleId}")
+    public String deleteRoleFromUser(@PathVariable int userId, @PathVariable int roleId) {
+        var user = userService.getUserById(userId);
+        var role = roleService.getRoleById(roleId);
+        user.getRoles().remove(role);
+        userService.updateUser(userId, user);
+        return "redirect:/role/" + userId;
+    }
+
+    @PutMapping("/{userId}/{roleId}")
+    public String addRoleFromUser(@PathVariable int userId, @PathVariable int roleId) {
+        var user = userService.getUserById(userId);
+        var role = roleService.getRoleById(roleId);
+        user.getRoles().add(role);
+        userService.updateUser(userId, user);
+        return "redirect:/role/" + userId;
+    }
+}

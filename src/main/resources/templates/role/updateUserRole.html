@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" href="/css/styles.css">
+  <meta charset="UTF-8">
+  <title>Сеть ЭЗС</title>
+</head>
+<body>
+<div>
+  <div>
+    <h1>Изменить права доступа пользователя</h1>
+    <table>
+      <tbody>
+      <tr>
+        <th>Имя</th>
+        <td th:text="${user.firstName}"></td>
+      </tr>
+      <tr>
+        <th>Фамилия</th>
+        <td th:text="${user.lastName}"></td>
+      </tr>
+      <tr>
+        <th>Права доступа пользователя</th>
+        <td th:each="role: ${user.roles}">
+          <form th:action="@{/role/{userId}/{roleId}(userId=${user.userId}, roleId=${role.roleId})}" th:method="delete">
+            <input type="submit" th:value="${role.roleName}">
+          </form>
+        </td>
+      </tr>
+      <tr>
+        <th>Добавить права доступа</th>
+        <td th:each="role: ${roles}">
+          <form th:action="@{/role/{userId}/{roleId}(userId=${user.userId}, roleId=${role.roleId})}" th:method="put">
+            <input type="submit" th:value="${role.roleName}">
+          </form>
+        </td>
+      </tr>
+      <tr>
+
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <a th:href="@{/user}">К списку пользователей</a>
+</div>
+</body>
+</html>

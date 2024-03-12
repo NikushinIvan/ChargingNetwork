@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/css/styles.css">
+    <meta charset="UTF-8">
+    <title>Сеть ЭЗС</title>
+</head>
+<body>
+<div>
+    <h1>Список пользователей</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Права доступа</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user: ${users}">
+            <td><a th:href="@{/user/{id}/update(id=${user.userId})}" th:text="${user.firstName}">firstName</a></td>
+            <td th:text="${user.lastName}">lastName</td>
+            <td>
+                <span th:each="role: ${user.roles}"
+                      th:with="roleName=' ' + ${role.roleName} + ' '"
+                      th:text="${roleName}">
+                </span>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <form th:action="@{/user/create}" th:method="get">
+            <button>Добавить нового пользователя</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

@@ -25,8 +25,12 @@ entity User_role {
     role_id
     --
     user_id
+}
+
+entity Role {
+    role_id
     --
-    role
+    role_name
 }
 
 entity Address {
@@ -76,6 +80,7 @@ entity Charge_session {
 User -- Station
 User -- User_password
 User -- User_role
+User_role -- Role
 User -- Charge_session
 Address -- Station
 Vendor -- Station
