@@ -5,6 +5,8 @@ import sber.school.ChargingNetwork.model.user.User;
 import sber.school.ChargingNetwork.repository.UserRepository;
 import sber.school.ChargingNetwork.service.UserService;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -23,8 +25,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Iterable<User> getUsers() {
-        return userRepository.findAll();
+    public List<User> getUsers() {
+        List<User> result = new ArrayList<>();
+        userRepository.findAll().forEach(result::add);
+        return result;
     }
 
     @Override
@@ -53,5 +57,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(int id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public List<User> getUsersGetWithRole(String roleName) {
+        return userRepository.findByRoles_RoleNameContaining(roleName);
     }
 }

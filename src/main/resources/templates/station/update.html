@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" href="/css/styles.css">
+  <meta charset="UTF-8">
+  <title>Сеть ЭЗС</title>
+</head>
+<body>
+<div>
+  <h1>Редактирование станции</h1>
+  <form th:action="@{/station/{id}(id=${station.stationId})}" th:method="PUT" th:object="${station}">
+    <div>
+      <input type="text" th:name="stationName" th:field="*{stationName}" placeholder="Название">
+    </div>
+    <div>
+      <select th:field="*{address}">
+        <option th:each="a: ${addresses}"
+                th:text="${a}"
+                th:value="${a.addressId}">Address
+        </option>
+      </select>
+    </div>
+    <div>
+      <select th:field="*{manager}">
+        <option th:each="user: ${users}"
+                th:text="|${user.firstName} ${user.lastName}|"
+                th:value="${user.userId}">user
+        </option>
+      </select>
+    </div>
+    <button type="submit">Сохранить изменения</button><br/>
+  </form>
+  <div>
+    <form th:action="@{/station/{id}(id=${station.stationId})}" th:method="delete">
+      <button>Удалить станцию</button>
+    </form>
+  </div>
+  <a th:href="@{/station}">К списку станций</a>
+</div>
+</body>
+</html>

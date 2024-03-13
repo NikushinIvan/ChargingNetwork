@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" href="/css/styles.css">
+  <meta charset="UTF-8">
+  <title>Сеть ЭЗС</title>
+</head>
+<body>
+<div>
+  <h1>Панель управления</h1>
+  <div>
+    <form th:action="@{/station/create}" th:method="get">
+      <button>Добавить новую станцию</button>
+    </form>
+  </div>
+  <div>
+    <form th:action="@{/station}" th:method="get">
+      <button>К списку станций</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>

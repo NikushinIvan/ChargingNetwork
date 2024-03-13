@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" href="/css/styles.css">
+  <meta charset="UTF-8">
+  <title>Сеть ЭЗС</title>
+</head>
+<body>
+<div>
+  <h1>Профиль зарядной станции</h1>
+  <table>
+    <tbody>
+    <tr>
+      <th>Название станции</th>
+      <td th:text="${station.stationName}"></td>
+    </tr>
+    <tr>
+      <th>Адрес</th>
+      <td th:text="${station.address}"></td>
+    </tr>
+    <tr>
+      <th>Менеджер станции</th>
+      <td th:text="|${station.manager.firstName} ${station.manager.lastName}|"></td>
+    </tr>
+    <tr>
+      <th>Поставщик</th>
+      <td th:text="${station.vendor.companyName}"></td>
+    </tr>
+    <tr>
+      <th>Служба поддержки</th>
+      <td th:text="${station.vendor.phoneSupportService}"></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>

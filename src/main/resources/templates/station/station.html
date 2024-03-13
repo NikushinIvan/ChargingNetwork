@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" href="/css/styles.css">
+  <meta charset="UTF-8">
+  <title>Сеть ЭЗС</title>
+</head>
+<body>
+<div>
+  <h1>Список Станций</h1>
+  <table>
+    <thead>
+    <tr>
+      <th>Название</th>
+      <th>Адрес</th>
+      <th>Состояние</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="station: ${stations}">
+      <td><a th:href="@{/station/{id}/update(id=${station.stationId})}" th:text="${station.stationName}">stationName</a></td>
+      <td th:text="${station.address}">address</td>
+      <td th:text="${station.stationState}">stationState</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
