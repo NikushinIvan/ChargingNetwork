@@ -1,10 +1,8 @@
 package sber.school.ChargingNetwork.controller;
 
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import sber.school.ChargingNetwork.dao.UserDao;
 import sber.school.ChargingNetwork.model.user.User;
 import sber.school.ChargingNetwork.service.UserService;
 
@@ -17,11 +15,8 @@ public class UserController {
 
     private final UserService userService;
 
-    private final UserDao userDao;
-
-    public UserController(UserService userService, UserDao userDao) {
+    public UserController(UserService userService) {
         this.userService = userService;
-        this.userDao = userDao;
     }
 
     @GetMapping
@@ -32,11 +27,11 @@ public class UserController {
 
     @PostMapping
     public String createUser(@ModelAttribute User user) {
-        userService.createUser(user);
+        userService.saveUser(user);
         return "redirect:/user";
     }
 
-    @GetMapping("/{ud}")
+    @GetMapping("/{id}")
     public String getUser(Model model, @PathVariable int id) {
         var user = userService.getUserById(id);
         model.addAttribute("user", user);
@@ -53,6 +48,11 @@ public class UserController {
     public String updateUser(@PathVariable int id, @ModelAttribute User user) {
         userService.updateUser(id, user);
         return "redirect:/user";
+    }
+
+    @GetMapping("/managerPanel")
+    public String showManagerPanel() {
+        return "/user/managerPanel";
     }
 
     @GetMapping("/create")

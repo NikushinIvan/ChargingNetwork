@@ -4,7 +4,7 @@ import sber.school.ChargingNetwork.model.user.User;
 
 public interface UserService {
 
-    User createUser(User user);
+    User saveUser(User user);
     Iterable<User> getUsers();
     User getUserById(int id);
     User getUserByUsername(String username);

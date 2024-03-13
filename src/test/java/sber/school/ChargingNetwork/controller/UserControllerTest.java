@@ -82,7 +82,7 @@ class UserControllerTest {
 
     @Test
     public void createUser() throws Exception {
-        when(userService.createUser(user2)).thenAnswer(
+        when(userService.saveUser(user2)).thenAnswer(
                 (i) -> {
                     User argument = i.getArgument(0);
                     argument.setUserId(3);

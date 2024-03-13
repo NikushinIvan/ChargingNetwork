@@ -1,8 +1,6 @@
 package sber.school.ChargingNetwork.service.impl;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import sber.school.ChargingNetwork.dao.UserDao;
 import sber.school.ChargingNetwork.model.user.User;
 import sber.school.ChargingNetwork.repository.UserRepository;
 import sber.school.ChargingNetwork.service.UserService;
@@ -13,16 +11,14 @@ import java.util.NoSuchElementException;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final UserDao userDao;
 
-    public UserServiceImpl(UserRepository userRepository, UserDao userDao) {
+    public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.userDao = userDao;
     }
 
 
     @Override
-    public User createUser(User user) {
+    public User saveUser(User user) {
         return userRepository.save(user);
     }
 
@@ -43,7 +39,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserByUsername(String username) {
-        return userDao.findByUsername(username);
+        return userRepository.findByUsername(username);
     }
 
     @Override

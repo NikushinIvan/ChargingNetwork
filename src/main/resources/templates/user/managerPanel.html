@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" href="/css/styles.css">
+  <meta charset="UTF-8">
+  <title>Сеть ЭЗС</title>
+</head>
+<body>
+<div>
+  <h1>Панель управления</h1>
+  <div>
+    <form th:action="@{/user/create}" th:method="get">
+      <button>Добавить нового пользователя</button>
+    </form>
+  </div>
+  <div>
+    <form th:action="@{/user}" th:method="get">
+      <button>К списку пользователей</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>
