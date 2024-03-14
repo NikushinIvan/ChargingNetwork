@@ -1,6 +1,6 @@
 bot:
   name: ChargingNetworkBot
-  token: AAEYnRLay_IfdvmufZBp8BeFilkKzMLhQqc
+  token: 7066424212:AAEYnRLay_IfdvmufZBp8BeFilkKzMLhQqc
 spring:
   mvc:
     hiddenMethod:

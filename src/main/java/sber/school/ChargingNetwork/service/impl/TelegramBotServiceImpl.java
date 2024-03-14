@@ -1,10 +1,13 @@
 package sber.school.ChargingNetwork.service.impl;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-import sber.school.ChargingNetwork.BotConfig;
+import sber.school.ChargingNetwork.config.BotConfig;
 import sber.school.ChargingNetwork.model.station.Station;
 import sber.school.ChargingNetwork.model.user.User;
 import sber.school.ChargingNetwork.service.TelegramBotService;
@@ -12,7 +15,14 @@ import sber.school.ChargingNetwork.service.UserService;
 
 import java.util.NoSuchElementException;
 
+@Service
+@PropertySource("application.yml")
 public class TelegramBotServiceImpl extends TelegramLongPollingBot implements TelegramBotService {
+
+    @Value("${bot.name}")
+    private String botName;
+    @Value("${bot.token}")
+    private String token;
 
     private static final String HELP_MESSAGE =
             "Чтобы подписаться на уведомления станции, введите фамилию и имя через пробел." + "\n" +
@@ -81,7 +91,7 @@ public class TelegramBotServiceImpl extends TelegramLongPollingBot implements Te
             var managerData = firstNameAndLastName.split(" ");
             var user = userService.getUserByFirstNameAndLastName(managerData[1], managerData[0]);
             var hasRole = user.getRoles().stream()
-                    .anyMatch(role -> "ROLE_MANAGER_USER".equals(role.getRoleName()));
+                    .anyMatch(role -> "ROLE_MANAGER_STATION".equals(role.getRoleName()));
             if (hasRole) {
                 user.setChatId(chatId);
                 userService.updateUser(user.getUserId(), user);

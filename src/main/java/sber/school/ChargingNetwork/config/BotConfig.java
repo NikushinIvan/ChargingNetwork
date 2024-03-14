@@ -1,4 +1,4 @@
-package sber.school.ChargingNetwork;
+package sber.school.ChargingNetwork.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -11,9 +11,6 @@ public class BotConfig {
     private String botName;
     @Value("${bot.token}")
     private String token;
-
-    public BotConfig() {
-    }
 
     public String getBotName() {
         return botName;
