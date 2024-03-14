@@ -17,10 +17,12 @@ public class ChargeSession {
 
     @ManyToOne
     @NotNull
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
     @NotNull
+    @JoinColumn(name = "station_id")
     private Station station;
 
     @Column(columnDefinition = "TIMESTAMP")
