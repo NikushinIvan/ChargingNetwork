@@ -34,13 +34,10 @@ public class ChargeSession {
     public ChargeSession() {
     }
 
-    public ChargeSession(int sessionId, User user, Station station, LocalDateTime startTime, LocalDateTime stopTime, String stopReason) {
-        this.sessionId = sessionId;
+    public ChargeSession(User user, Station station, LocalDateTime startTime) {
         this.user = user;
         this.station = station;
         this.startTime = startTime;
-        this.stopTime = stopTime;
-        this.stopReason = stopReason;
     }
 
     public int getSessionId() {

@@ -8,6 +8,7 @@ import sber.school.ChargingNetwork.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -62,5 +63,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getUsersGetWithRole(String roleName) {
         return userRepository.findByRoles_RoleNameContaining(roleName);
+    }
+
+    @Override
+    public User getByUid(String uid) {
+        var user = userRepository.findByUid(uid);
+        if (user.isPresent()) {
+            return user.get();
+        } else {
+            throw  new NoSuchElementException("Пользователь не найден");
+        }
     }
 }

@@ -6,6 +6,7 @@ import sber.school.ChargingNetwork.repository.StationRepository;
 import sber.school.ChargingNetwork.service.StationService;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class StationServiceImpl implements StationService {
@@ -46,5 +47,18 @@ public class StationServiceImpl implements StationService {
     @Override
     public void deleteStation(int id) {
         stationRepository.deleteById(id);
+    }
+
+    @Override
+    public void setStationState(int id, String state) {
+        var station = stationRepository.findById(id);
+        station.ifPresentOrElse(
+                s -> {
+                    s.setStationState(state);
+                    stationRepository.save(s);
+                },
+                () -> {
+                    throw new NoSuchElementException("Станция не найдена");
+                });
     }
 }
