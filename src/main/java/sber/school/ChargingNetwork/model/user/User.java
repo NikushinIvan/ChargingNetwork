@@ -16,6 +16,7 @@ public class User {
     private String username;
     @NotNull
     private String password;
+    private Long chatId;
     @NotNull
     private String firstName;
     @NotNull
@@ -100,5 +101,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Long getChatId() {
+        return chatId;
+    }
+
+    public void setChatId(Long chatId) {
+        this.chatId = chatId;
     }
 }

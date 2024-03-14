@@ -4,16 +4,18 @@ import org.springframework.stereotype.Service;
 import sber.school.ChargingNetwork.model.station.Station;
 import sber.school.ChargingNetwork.repository.StationRepository;
 import sber.school.ChargingNetwork.service.StationService;
+import sber.school.ChargingNetwork.service.TelegramBotService;
 
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 public class StationServiceImpl implements StationService {
 
+    private final TelegramBotService telegramBotService;
     private final StationRepository stationRepository;
 
-    public StationServiceImpl(StationRepository stationRepository) {
+    public StationServiceImpl(TelegramBotService telegramBotService, StationRepository stationRepository) {
+        this.telegramBotService = telegramBotService;
         this.stationRepository = stationRepository;
     }
 
@@ -56,6 +58,9 @@ public class StationServiceImpl implements StationService {
                 s -> {
                     s.setStationState(state);
                     stationRepository.save(s);
+                    if ("ERROR".equals(state) || "DISCONNECT".equals(state)) {
+                        telegramBotService.sendStationError(s);
+                    }
                 },
                 () -> {
                     throw new NoSuchElementException("Станция не найдена");

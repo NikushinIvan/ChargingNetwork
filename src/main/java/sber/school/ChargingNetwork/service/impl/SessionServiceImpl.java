@@ -3,7 +3,6 @@ package sber.school.ChargingNetwork.service.impl;
 import org.springframework.stereotype.Service;
 import sber.school.ChargingNetwork.dto.ResponseDto;
 import sber.school.ChargingNetwork.dto.StartSessionRequestDto;
-import sber.school.ChargingNetwork.dto.StationStateRequestDto;
 import sber.school.ChargingNetwork.dto.StopSessionRequestDto;
 import sber.school.ChargingNetwork.model.chargeSession.ChargeSession;
 import sber.school.ChargingNetwork.repository.ChargeSessionRepository;
@@ -30,7 +29,7 @@ public class SessionServiceImpl implements SessionService {
     @Override
     public ResponseDto startSession(StartSessionRequestDto request, int id) {
         try {
-            var user = userService.getByUid(request.getUid());
+            var user = userService.getUserByUid(request.getUid());
             var station = stationService.getStationById(id);
             if (!"WAIT".equals(station.getStationState())) {
                 return new ResponseDto("REJECTED");

@@ -14,6 +14,7 @@ public interface UserService {
     void updateUser(int id, User user);
     void deleteUser(int id);
     List<User>getUsersGetWithRole(String roleName);
-    User getByUid(String uid) throws NoSuchElementException;
+    User getUserByUid(String uid) throws NoSuchElementException;
+    User getUserByFirstNameAndLastName(String firstName, String lastName);
 
 }

@@ -66,12 +66,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getByUid(String uid) {
+    public User getUserByUid(String uid) {
         var user = userRepository.findByUid(uid);
         if (user.isPresent()) {
             return user.get();
         } else {
-            throw  new NoSuchElementException("Пользователь не найден");
+            throw new NoSuchElementException("Пользователь не найден");
+        }
+    }
+
+    @Override
+    public User getUserByFirstNameAndLastName(String firstName, String lastName) {
+        var user = userRepository.findByFirstNameAndLastName(firstName, lastName);
+        if (user.isPresent()) {
+            return user.get();
+        } else {
+            throw new NoSuchElementException("Пользователь не найден");
         }
     }
 }
