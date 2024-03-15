@@ -3,10 +3,7 @@ package sber.school.ChargingNetwork.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import sber.school.ChargingNetwork.dto.ResponseDto;
-import sber.school.ChargingNetwork.dto.StartSessionRequestDto;
-import sber.school.ChargingNetwork.dto.StationStateRequestDto;
-import sber.school.ChargingNetwork.dto.StopSessionRequestDto;
+import sber.school.ChargingNetwork.dto.*;
 import sber.school.ChargingNetwork.service.SessionService;
 import sber.school.ChargingNetwork.service.StationService;
 
@@ -30,14 +27,14 @@ public class ChargerController {
     }
 
     @PostMapping("/{id}/start")
-    public ResponseEntity<ResponseDto> startSession(@RequestBody StartSessionRequestDto request,
-                                                       @PathVariable int id) {
+    public ResponseEntity<StartSessionResponseDto> startSession(@RequestBody StartSessionRequestDto request,
+                                                                @PathVariable int id) {
         var response = sessionService.startSession(request, id);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("/{id}/stop")
-    public ResponseEntity<ResponseDto> stopSession(@RequestBody StopSessionRequestDto request) {
+    public ResponseEntity<StopSessionResponseDto> stopSession(@RequestBody StopSessionRequestDto request) {
         var response = sessionService.stopSession(request);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

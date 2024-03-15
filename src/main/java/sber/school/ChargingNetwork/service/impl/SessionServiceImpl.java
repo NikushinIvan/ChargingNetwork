@@ -1,7 +1,8 @@
 package sber.school.ChargingNetwork.service.impl;
 
 import org.springframework.stereotype.Service;
-import sber.school.ChargingNetwork.dto.ResponseDto;
+import sber.school.ChargingNetwork.dto.StartSessionResponseDto;
+import sber.school.ChargingNetwork.dto.StopSessionResponseDto;
 import sber.school.ChargingNetwork.dto.StartSessionRequestDto;
 import sber.school.ChargingNetwork.dto.StopSessionRequestDto;
 import sber.school.ChargingNetwork.model.chargeSession.ChargeSession;
@@ -27,24 +28,24 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
-    public ResponseDto startSession(StartSessionRequestDto request, int id) {
+    public StartSessionResponseDto startSession(StartSessionRequestDto request, int id) {
         try {
             var user = userService.getUserByUid(request.getUid());
             var station = stationService.getStationById(id);
             if (!"WAIT".equals(station.getStationState())) {
-                return new ResponseDto("REJECTED");
+                return new StartSessionResponseDto("REJECTED");
             }
             var startTime = LocalDateTime.now();
             var session = new ChargeSession(user, station, startTime);
-            chargeSessionRepository.save(session);
-            return new ResponseDto("ACCEPTED");
+            var savedSession = chargeSessionRepository.save(session);
+            return new StartSessionResponseDto("ACCEPTED", savedSession.getSessionId());
         } catch ( NoSuchElementException e) {
-            return new ResponseDto("REJECTED");
+            return new StartSessionResponseDto("REJECTED");
         }
     }
 
     @Override
-    public ResponseDto stopSession(StopSessionRequestDto request) {
+    public StopSessionResponseDto stopSession(StopSessionRequestDto request) {
         var sessionId = request.getChargeSessionId();
         var stopReason = request.getStopReason();
         var session = chargeSessionRepository.findById(sessionId);
@@ -52,8 +53,8 @@ public class SessionServiceImpl implements SessionService {
             session.get().setStopReason(stopReason);
             session.get().setStopTime(LocalDateTime.now());
             chargeSessionRepository.save(session.get());
-            return new ResponseDto("ACCEPTED");
+            return new StopSessionResponseDto("ACCEPTED");
         }
-        return new ResponseDto("REJECTED");
+        return new StopSessionResponseDto("REJECTED");
     }
 }
