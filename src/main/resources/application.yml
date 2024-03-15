@@ -1,6 +1,11 @@
 bot:
   name: ChargingNetworkBot
   token: 7066424212:AAEYnRLay_IfdvmufZBp8BeFilkKzMLhQqc
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
 spring:
   mvc:
     hiddenMethod:

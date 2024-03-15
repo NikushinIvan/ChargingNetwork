@@ -1,5 +1,6 @@
 package sber.school.ChargingNetwork.service.impl;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import sber.school.ChargingNetwork.model.user.User;
 import sber.school.ChargingNetwork.repository.UserRepository;
@@ -8,20 +9,22 @@ import sber.school.ChargingNetwork.service.UserService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
     @Override
     public User saveUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -51,6 +54,7 @@ public class UserServiceImpl implements UserService {
     public void updateUser(int id, User updatedUser) {
         updatedUser.setUserId(id);
         var user = userRepository.findById(id);
+        user.get().setPassword(passwordEncoder.encode(user.get().getPassword()));
         updatedUser.setRoles(user.get().getRoles());
         userRepository.save(updatedUser);
     }
