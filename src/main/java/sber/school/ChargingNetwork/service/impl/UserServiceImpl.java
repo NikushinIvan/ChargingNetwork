@@ -47,7 +47,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
+        var user = userRepository.findByUsername(username);
+        if (user != null) {
+            return user;
+        } else {
+            throw new NoSuchElementException("Пользователь не найден");
+        }
     }
 
     @Override
