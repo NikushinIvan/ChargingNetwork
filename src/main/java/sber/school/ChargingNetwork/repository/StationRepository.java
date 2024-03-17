@@ -4,4 +4,7 @@ import org.springframework.data.repository.CrudRepository;
 import sber.school.ChargingNetwork.model.station.Station;
 
 public interface StationRepository extends CrudRepository<Station, Integer> {
+
+    Station findByLogin(String login);
+
 }

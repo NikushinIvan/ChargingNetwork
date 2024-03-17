@@ -4,28 +4,28 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import sber.school.ChargingNetwork.service.UserService;
+import sber.school.ChargingNetwork.repository.UserRepository;
+import sber.school.ChargingNetwork.service.ApplicationUserDetailsService;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.NoSuchElementException;
 
 @Service
-public class UserDetailsServiceImpl implements UserDetailsService {
+public class applicationUserDetailsServiceImpl implements ApplicationUserDetailsService {
 
-    private final UserService userService;
+    private final UserRepository userRepository;
 
-    public UserDetailsServiceImpl(UserService userService) {
-        this.userService = userService;
+    public applicationUserDetailsServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         try {
-            var user = userService.getUserByUsername(username);
+            var user = userRepository.findByUsername(username);
             Collection<GrantedAuthority> authorities = new HashSet<>();
             user.getRoles().forEach(
                     role -> authorities.add(new SimpleGrantedAuthority(role.getRoleName()))
