@@ -14,11 +14,11 @@ import java.util.HashSet;
 import java.util.NoSuchElementException;
 
 @Service
-public class applicationUserDetailsServiceImpl implements ApplicationUserDetailsService {
+public class ApplicationUserDetailsServiceImpl implements ApplicationUserDetailsService {
 
     private final UserRepository userRepository;
 
-    public applicationUserDetailsServiceImpl(UserRepository userRepository) {
+    public ApplicationUserDetailsServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

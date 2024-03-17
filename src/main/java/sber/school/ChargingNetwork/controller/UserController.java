@@ -1,5 +1,8 @@
 package sber.school.ChargingNetwork.controller;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -32,10 +35,15 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public String getUser(Model model, @PathVariable int id) {
+    public String getUser(Model model, @PathVariable int id, @AuthenticationPrincipal UserDetails userDetails) {
         var user = userService.getUserById(id);
-        model.addAttribute("user", user);
-        return "/user/profile";
+        if (userDetails.getUsername().equals(user.getUsername())) {
+            model.addAttribute("user", user);
+            return "/user/profile";
+        } else {
+            model.addAttribute("error", "Страница данного пользователя недоступна");
+            return "error";
+        }
     }
 
     @DeleteMapping("/{id}")
@@ -71,7 +79,7 @@ public class UserController {
     @ExceptionHandler(NoSuchElementException.class)
     public String handleNoSuchElementException(NoSuchElementException exception, Model model,
                                                HttpServletResponse response) {
-        model.addAttribute("errorText", exception.getMessage());
+        model.addAttribute("error", exception.getMessage());
         response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         return "error";
     }

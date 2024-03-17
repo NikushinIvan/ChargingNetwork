@@ -12,6 +12,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import sber.school.ChargingNetwork.service.ApplicationStationDetailsService;
 import sber.school.ChargingNetwork.service.ApplicationUserDetailsService;
 
+import static org.springframework.http.HttpMethod.GET;
+
 @Configuration
 public class SecurityConfig {
 
@@ -36,7 +38,7 @@ public class SecurityConfig {
                 .mvcMatcher("/charger/**")
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().anyRequest().authenticated().and()
+                .authorizeRequests().anyRequest().hasRole("STATION").and()
                 .httpBasic().and()
                 .build();
     }
@@ -51,8 +53,18 @@ public class SecurityConfig {
         return http
                 .mvcMatcher("/**")
                 .csrf().disable()
-                .authorizeRequests().antMatchers("/login", "/error").permitAll().and()
-                .authorizeRequests().anyRequest().authenticated().and()
+                .authorizeRequests()
+                    .mvcMatchers("/login", "/error", "/logout").permitAll().and()
+                .authorizeRequests()
+                    .antMatchers(GET, "/user/*").authenticated()
+                    .antMatchers("/user").hasAnyRole("ADMIN", "MANAGER_USER")
+                    .mvcMatchers("/user/**").hasAnyRole("ADMIN", "MANAGER_USER")
+                    .mvcMatchers("/role/**").hasRole("ADMIN").and()
+                .authorizeRequests()
+                    .antMatchers(GET, "/station").authenticated()
+                    .mvcMatchers("/station/**").hasAnyRole("ADMIN", "MANAGER_STATION").and()
+                .authorizeRequests()
+                    .anyRequest().denyAll().and()
                 .formLogin().and()
                 .build();
     }
