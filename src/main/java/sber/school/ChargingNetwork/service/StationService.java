@@ -1,5 +1,6 @@
 package sber.school.ChargingNetwork.service;
 
+import sber.school.ChargingNetwork.dto.StationState;
 import sber.school.ChargingNetwork.model.station.Station;
 
 public interface StationService {
@@ -9,7 +10,7 @@ public interface StationService {
     Station getStationById(int id);
     void updateStation(int id, Station station);
     void deleteStation(int id);
-    void setStationState(int id, String state);
+    void setStationState(int id, StationState state);
     Station findByLogin(String login);
 
 }

@@ -1,20 +1,20 @@
 package sber.school.ChargingNetwork.dto;
 
 public class StationStateRequestDto {
-    private String stationState;
+    private StationState stationState;
 
     public StationStateRequestDto() {
     }
 
-    public StationStateRequestDto(String stationState) {
+    public StationStateRequestDto(StationState stationState) {
         this.stationState = stationState;
     }
 
-    public String getStationState() {
+    public StationState getStationState() {
         return stationState;
     }
 
-    public void setStationState(String stationState) {
+    public void setStationState(StationState stationState) {
         this.stationState = stationState;
     }
 }

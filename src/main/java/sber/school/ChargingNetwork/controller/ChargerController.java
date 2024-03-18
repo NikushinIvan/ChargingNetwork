@@ -22,7 +22,11 @@ public class ChargerController {
     @PostMapping("/{id}")
     public ResponseEntity<Void> setStationState(@RequestBody StationStateRequestDto stationState,
                                                 @PathVariable int id) {
-        stationService.setStationState(id, stationState.getStationState());
+        try {
+            stationService.setStationState(id, stationState.getStationState());
+        } catch (NullPointerException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

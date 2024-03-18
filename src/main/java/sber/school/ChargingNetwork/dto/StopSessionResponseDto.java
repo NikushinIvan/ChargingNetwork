@@ -2,21 +2,20 @@ package sber.school.ChargingNetwork.dto;
 
 public class StopSessionResponseDto {
 
-    private String status;
+    private ResponseStatus status;
 
     public StopSessionResponseDto() {
     }
 
-
-    public StopSessionResponseDto(String status) {
+    public StopSessionResponseDto(ResponseStatus status) {
         this.status = status;
     }
 
-    public String getStatus() {
+    public ResponseStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(ResponseStatus status) {
         this.status = status;
     }
 }

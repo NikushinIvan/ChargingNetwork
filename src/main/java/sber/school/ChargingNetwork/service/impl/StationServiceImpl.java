@@ -1,12 +1,16 @@
 package sber.school.ChargingNetwork.service.impl;
 
 import org.springframework.stereotype.Service;
+import sber.school.ChargingNetwork.dto.StationState;
 import sber.school.ChargingNetwork.model.station.Station;
 import sber.school.ChargingNetwork.repository.StationRepository;
 import sber.school.ChargingNetwork.service.StationService;
 import sber.school.ChargingNetwork.service.TelegramBotService;
 
 import java.util.NoSuchElementException;
+
+import static sber.school.ChargingNetwork.dto.StationState.DISCONNECT;
+import static sber.school.ChargingNetwork.dto.StationState.ERROR;
 
 @Service
 public class StationServiceImpl implements StationService {
@@ -52,13 +56,16 @@ public class StationServiceImpl implements StationService {
     }
 
     @Override
-    public void setStationState(int id, String state) {
+    public void setStationState(int id, StationState state) {
+        if (state == null) {
+            throw new NullPointerException("Поле state запроса не должно быть пустым");
+        }
         var station = stationRepository.findById(id);
         station.ifPresentOrElse(
                 s -> {
-                    s.setStationState(state);
+                    s.setStationState(state.name());
                     stationRepository.save(s);
-                    if ("ERROR".equals(state) || "DISCONNECT".equals(state)) {
+                    if (state == ERROR || state == DISCONNECT) {
                         telegramBotService.sendStationError(s);
                     }
                 },
