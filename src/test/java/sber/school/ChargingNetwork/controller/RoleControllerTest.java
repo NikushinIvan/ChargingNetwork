@@ -33,7 +33,7 @@ class RoleControllerTest {
 
     @Test
     void showUpdateUserRolePage_validRequest_returnViewName() {
-        var model = Mockito.mock(Model.class);
+        var model = mock(Model.class);
         var id = 1;
         var user = new User(1, "email", "Иван", "Фролов", null);
         var roles = List.of(new Role());
@@ -51,7 +51,7 @@ class RoleControllerTest {
 
     @Test
     void showUpdateUserRolePage_unknownId_throwNoSuchElementException() {
-        var model = Mockito.mock(Model.class);
+        var model = mock(Model.class);
         var id = 2;
 
         doThrow(NoSuchElementException.class).when(userService).getUserById(2);

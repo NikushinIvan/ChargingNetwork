@@ -34,6 +34,13 @@ public class Station {
     public Station() {
     }
 
+    public Station(int stationId, String stationName, Vendor vendor, Address address) {
+        this.stationId = stationId;
+        this.stationName = stationName;
+        this.vendor = vendor;
+        this.address = address;
+    }
+
     public Station(int stationId, User manager, Vendor vendor, Address address, String stationName, String stationState) {
         this.stationId = stationId;
         this.manager = manager;

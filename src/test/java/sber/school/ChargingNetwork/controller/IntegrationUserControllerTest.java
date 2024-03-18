@@ -18,7 +18,7 @@ import java.util.NoSuchElementException;
 import static org.mockito.Mockito.when;
 
 @WebMvcTest(UserController.class)
-class UserControllerTest {
+class IntegrationUserControllerTest {
 
     @MockBean
     private UserService userService;
