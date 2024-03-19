@@ -35,11 +35,6 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public void updateRole(int roleId, Role updateRole) {
-        roleRepository.save(updateRole);
-    }
-
-    @Override
     public Iterable<Role> excludeRepeatRoles(Set<Role> userRoles) {
         return StreamSupport.stream(roleRepository.findAll().spliterator(), false)
                 .filter(role -> !userRoles.contains(role))
