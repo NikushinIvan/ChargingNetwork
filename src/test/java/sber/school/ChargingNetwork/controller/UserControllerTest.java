@@ -5,11 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
-import sber.school.ChargingNetwork.model.station.Address;
-import sber.school.ChargingNetwork.model.station.Station;
-import sber.school.ChargingNetwork.model.station.Vendor;
 import sber.school.ChargingNetwork.model.user.User;
 import sber.school.ChargingNetwork.service.UserService;
 
@@ -153,7 +149,7 @@ class UserControllerTest {
     }
 
     @Test
-    public void handleNoSuchElementException_noSuchElementException() {
+    public void handleNoSuchElementException_noSuchElementException_returnViewName() {
         var model = mock(Model.class);
         var httpResponse = mock(HttpServletResponse.class);
         var exception = mock(NoSuchElementException.class);

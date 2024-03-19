@@ -20,7 +20,8 @@ public class Address {
     public Address() {
     }
 
-    public Address(String city, String street, int houseNumber) {
+    public Address(int addressId, String city, String street, int houseNumber) {
+        this.addressId = addressId;
         this.city = city;
         this.street = street;
         this.houseNumber = houseNumber;
