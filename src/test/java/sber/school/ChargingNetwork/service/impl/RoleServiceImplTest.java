@@ -64,7 +64,7 @@ class RoleServiceImplTest {
     public void getRoleById_validRoleId_throwNoSuchElementException() {
         var id = 3;
 
-        doThrow(NoSuchElementException.class).when(roleRepository).findById(3);
+        doReturn(Optional.empty()).when(roleRepository).findById(3);
 
         assertThrows(NoSuchElementException.class, () -> roleService.getRoleById(id));
 

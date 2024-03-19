@@ -34,6 +34,10 @@ public class Station {
     public Station() {
     }
 
+    public Station(String stationState) {
+        this.stationState = stationState;
+    }
+
     public Station(int stationId, String stationName, String login, String password) {
         this.stationId = stationId;
         this.stationName = stationName;
