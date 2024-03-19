@@ -40,17 +40,17 @@ class StationControllerTest {
     @Test
     public void getAllStations_validRequest_returnViewNameAndListStations() {
         var model = mock(Model.class);
-        var users = List.of(
-                new User(1, "email", "Иван", "Фролов", null),
-                new User(2, "qwer", "Олег", "Котов", null),
-                new User(3, "asdf", "Екатерина", "Бусина", null));
+        var stations = List.of(
+                new Station(1, "ЭЗС1", new Vendor(), new Address()),
+                new Station(2, "ЭЗС2", new Vendor(), new Address()),
+                new Station(3, "ЭЗС3", new Vendor(), new Address()));
 
-        doReturn(users).when(stationService).getAllStations();
+        doReturn(stations).when(stationService).getAllStations();
 
         var response = stationController.getAllStations(model);
 
         verify(stationService, times(1)).getAllStations();
-        verify(model, times(1)).addAttribute("stations", users);
+        verify(model, times(1)).addAttribute("stations", stations);
         assertEquals("station/station", response);
     }
 
