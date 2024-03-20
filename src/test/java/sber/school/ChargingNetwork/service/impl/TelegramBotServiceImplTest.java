@@ -217,4 +217,9 @@ class TelegramBotServiceImplTest {
         verify(station, never()).getStationName();
         verify(station, never()).getAddress();
     }
+
+    @Test
+    public void getBootUsername() {
+        System.out.println(telegramBotService.getBotUsername());
+    }
 }
