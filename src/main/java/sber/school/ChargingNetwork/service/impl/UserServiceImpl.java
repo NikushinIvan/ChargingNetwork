@@ -46,20 +46,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByUsername(String username) {
-        var user = userRepository.findByUsername(username);
-        if (user != null) {
-            return user;
-        } else {
-            throw new NoSuchElementException("Пользователь не найден");
-        }
-    }
-
-    @Override
     public void updateUser(int id, User updatedUser) {
         updatedUser.setUserId(id);
         var user = userRepository.findById(id);
-        user.get().setPassword(passwordEncoder.encode(user.get().getPassword()));
         updatedUser.setRoles(user.get().getRoles());
         userRepository.save(updatedUser);
     }
