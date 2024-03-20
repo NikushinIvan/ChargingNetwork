@@ -1,6 +1,5 @@
 package sber.school.ChargingNetwork.service.impl;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -16,13 +15,7 @@ import sber.school.ChargingNetwork.service.UserService;
 import java.util.NoSuchElementException;
 
 @Service
-@PropertySource("application.yml")
 public class TelegramBotServiceImpl extends TelegramLongPollingBot implements TelegramBotService {
-
-    @Value("${bot.name}")
-    private String botName;
-    @Value("${bot.token}")
-    private String token;
 
     private static final String HELP_MESSAGE =
             "Чтобы подписаться на уведомления станции, введите фамилию и имя через пробел." + "\n" +
@@ -52,7 +45,6 @@ public class TelegramBotServiceImpl extends TelegramLongPollingBot implements Te
         if (update.hasMessage() && update.getMessage().hasText()) {
             var message = update.getMessage().getText();
             var chatId = update.getMessage().getChatId();
-
             switch (message) {
                 case "/start":
                 case "/help":
@@ -83,7 +75,7 @@ public class TelegramBotServiceImpl extends TelegramLongPollingBot implements Te
                                 station.getStationName(),
                                 station.getAddress()));
             }
-        } catch (NoSuchElementException ignored) {}
+        } catch (NullPointerException ignored) {}
     }
 
     private boolean addNewManagerToBot(String firstNameAndLastName, Long chatId) {

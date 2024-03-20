@@ -5,7 +5,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import sber.school.ChargingNetwork.dto.StationState;
 import sber.school.ChargingNetwork.model.station.Station;
 import sber.school.ChargingNetwork.model.station.Vendor;
 import sber.school.ChargingNetwork.repository.StationRepository;
