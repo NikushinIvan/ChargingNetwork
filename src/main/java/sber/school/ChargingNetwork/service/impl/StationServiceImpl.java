@@ -73,14 +73,4 @@ public class StationServiceImpl implements StationService {
                     throw new NoSuchElementException("Станция не найдена");
                 });
     }
-
-    @Override
-    public Station findByLogin(String login) {
-        var station = stationRepository.findByLogin(login);
-        if (station != null) {
-            return station;
-        } else {
-            throw new NoSuchElementException("Станция не найдена");
-        }
-    }
 }

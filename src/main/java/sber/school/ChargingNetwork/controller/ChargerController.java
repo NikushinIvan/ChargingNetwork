@@ -7,6 +7,8 @@ import sber.school.ChargingNetwork.dto.*;
 import sber.school.ChargingNetwork.service.SessionService;
 import sber.school.ChargingNetwork.service.StationService;
 
+import java.util.NoSuchElementException;
+
 @RestController
 @RequestMapping("charger/api")
 public class ChargerController {
@@ -24,7 +26,7 @@ public class ChargerController {
                                                 @PathVariable int id) {
         try {
             stationService.setStationState(id, stationState.getStationState());
-        } catch (NullPointerException e) {
+        } catch (NullPointerException | NoSuchElementException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(HttpStatus.OK);
