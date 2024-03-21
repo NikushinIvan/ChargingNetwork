@@ -12,10 +12,12 @@ spring:
       filter:
         enabled: true
   datasource:
-    url: jdbc:postgresql://localhost:5432/ChargingNetwork
+    url: jdbc:postgresql://localhost:18000/ChargingNetwork
     username: charging_network_app
     password: 1234
     driver-class-name: org.postgresql.Driver
   jpa:
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+    hibernate:
+      ddl-auto: create-drop
