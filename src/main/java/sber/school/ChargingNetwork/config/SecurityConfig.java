@@ -64,8 +64,10 @@ public class SecurityConfig {
                     .antMatchers(GET, "/station").authenticated()
                     .mvcMatchers("/station/**").hasAnyRole("ADMIN", "MANAGER_STATION").and()
                 .authorizeRequests()
+                    .antMatchers(GET, "/").authenticated()
                     .anyRequest().denyAll().and()
-                .formLogin().and()
+                .formLogin()
+                    .defaultSuccessUrl("/").and()
                 .build();
     }
 

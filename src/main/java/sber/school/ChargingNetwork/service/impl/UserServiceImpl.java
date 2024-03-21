@@ -48,6 +48,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUser(int id, User updatedUser) {
         updatedUser.setUserId(id);
+        updatedUser.setPassword(userRepository.findById(id).get().getPassword());
         var user = userRepository.findById(id);
         updatedUser.setRoles(user.get().getRoles());
         userRepository.save(updatedUser);
@@ -78,6 +79,16 @@ public class UserServiceImpl implements UserService {
         var user = userRepository.findByFirstNameAndLastName(firstName, lastName);
         if (user.isPresent()) {
             return user.get();
+        } else {
+            throw new NoSuchElementException("Пользователь не найден");
+        }
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        var user = userRepository.findByUsername(username);
+        if (user != null) {
+            return user;
         } else {
             throw new NoSuchElementException("Пользователь не найден");
         }

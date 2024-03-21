@@ -15,5 +15,5 @@ public interface UserService {
     List<User>getUsersGetWithRole(String roleName);
     User getUserByUid(String uid) throws NoSuchElementException;
     User getUserByFirstNameAndLastName(String firstName, String lastName);
-
+    User getUserByUsername(String username);
 }

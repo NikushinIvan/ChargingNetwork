@@ -14,7 +14,6 @@ public class User {
     private int userId;
     @NotNull
     private String username;
-    @NotNull
     private String password;
     private Long chatId;
     @NotNull
