@@ -1,0 +1,10 @@
+sber.school.ChargingNetwork
+sber.school.ChargingNetwork.config
+sber.school.ChargingNetwork.controller
+sber.school.ChargingNetwork.dto
+sber.school.ChargingNetwork.model.chargeSession
+sber.school.ChargingNetwork.model.station
+sber.school.ChargingNetwork.model.user
+sber.school.ChargingNetwork.repository
+sber.school.ChargingNetwork.service
+sber.school.ChargingNetwork.service.impl

@@ -26,7 +26,11 @@ public class SecurityConfig {
         this.stationDetailsService = stationDetailsService;
     }
 
-
+    /**
+     *
+     * Цепочка фильтров для аутентификации и авторизации зарядных станций
+     *
+     */
     @Bean
     @Order(1)
     public SecurityFilterChain chargerSecurityFilterChain(HttpSecurity http) throws Exception {
@@ -43,6 +47,11 @@ public class SecurityConfig {
                 .build();
     }
 
+    /**
+     *
+     * Цепочка фильтров для аутентификации и авторизации пользователей
+     *
+     */
     @Bean
     @Order(2)
     public SecurityFilterChain userSecurityFilterChain(HttpSecurity http) throws Exception {

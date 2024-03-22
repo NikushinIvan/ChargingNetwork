@@ -34,6 +34,14 @@ public class RoleServiceImpl implements RoleService {
         }
     }
 
+
+    /**
+     *
+     * Метод предназначен для избежания дублирования ролей в UI
+     *
+     * @param userRoles - Множество ролей пользователя
+     * @return - Список ролей, которые не установлены пользователю
+     */
     @Override
     public Iterable<Role> excludeRepeatRoles(Set<Role> userRoles) {
         return StreamSupport.stream(roleRepository.findAll().spliterator(), false)

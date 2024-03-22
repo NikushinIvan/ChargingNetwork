@@ -13,6 +13,11 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.NoSuchElementException;
 
+/**
+ *
+ * Класс реализует UserDetailsService для аутентификации пользователей
+ *
+ */
 @Service
 public class ApplicationUserDetailsServiceImpl implements ApplicationUserDetailsService {
 

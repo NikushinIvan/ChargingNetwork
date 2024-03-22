@@ -39,6 +39,12 @@ public class TelegramBotServiceImpl extends TelegramLongPollingBot implements Te
         this.userService = userService;
     }
 
+    /**
+     *
+     * Метод, обрабатывающий входящие сообщения в чате телеграм-бота
+     *
+     * @param update - параметр, содержащий информацию о событии чата, в том числе и тело сообщения
+     */
     @Override
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
@@ -77,6 +83,15 @@ public class TelegramBotServiceImpl extends TelegramLongPollingBot implements Te
         } catch (NullPointerException ignored) {}
     }
 
+    /**
+     *
+     * Метод id данного чата определенному пользователю в базу данных. По данному id приложение определяет, в какой чат
+     * отправлять уведомления о неисправности
+     *
+     * @param firstNameAndLastName - Имя и фамилия пользователя
+     * @param chatId - id используемого чата
+     * @return - Результат добавления подписки: true - подписка добавлена, false - подписка не добавлена
+     */
     private boolean addNewManagerToBot(String firstNameAndLastName, Long chatId) {
         try {
             var managerData = firstNameAndLastName.split(" ");

@@ -59,6 +59,13 @@ public class UserServiceImpl implements UserService {
         userRepository.deleteById(id);
     }
 
+    /**
+     *
+     * Метод ищет в базе данных пользователей с определенной ролью
+     *
+     * @param roleName - Название роли
+     * @return - Список пользователей, обладающих необходимой привелегией
+     */
     @Override
     public List<User> getUsersGetWithRole(String roleName) {
         return userRepository.findByRoles_RoleNameContaining(roleName);
