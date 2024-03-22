@@ -5,6 +5,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import sber.school.ChargingNetwork.model.station.Station;
 import sber.school.ChargingNetwork.model.station.Vendor;
 import sber.school.ChargingNetwork.repository.StationRepository;
@@ -26,26 +27,24 @@ class StationServiceImplTest {
     private TelegramBotService telegramBotService;
     @Mock
     private StationRepository stationRepository;
+    @Mock
+    private PasswordEncoder passwordEncoder;
 
     @InjectMocks
     private StationServiceImpl stationService;
 
     @Test
     public void saveStation_returnSavedStation() {
-        var station = new Station();
+        var station = mock(Station.class);
 
-        doAnswer(
-                invocation -> {
-                    Station newStation = invocation.getArgument(0);
-                    newStation.setStationId(1);
-                    return newStation;
-                }
-        ).when(stationRepository).save(station);
+        doReturn("password").when(station).getPassword();
+        doReturn(station).when(stationRepository).save(station);
 
         var result = stationService.saveStation(station);
 
+        verify(passwordEncoder, times(1)).encode("password");
         verify(stationRepository, times(1)).save(station);
-        assertEquals(1, result.getStationId());
+        assertEquals(station, result);
     }
 
     @Test

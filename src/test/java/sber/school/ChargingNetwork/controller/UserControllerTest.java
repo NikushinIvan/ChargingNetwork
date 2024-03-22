@@ -59,6 +59,7 @@ class UserControllerTest {
     @Test
     public void getUser_validRequest_returnViewNameAndUser() {
         var model = mock(Model.class);
+        var httpResponse = mock(HttpServletResponse.class);
         var id = 2;
         var user = new User(2, "user2", "Михаил", "Никушин", "22233344");
         var userDetails = new org.springframework.security.core.userdetails.User(
@@ -66,8 +67,9 @@ class UserControllerTest {
 
         doReturn(user).when(userService).getUserById(2);
 
-        var response = userController.getUser(model, id, userDetails);
+        var response = userController.getUser(model, id, userDetails, httpResponse);
 
+        verify(httpResponse, never()).setStatus(anyInt());
         verify(userService, times(1)).getUserById(2);
         verify(model, times(1)).addAttribute("user", user);
         assertEquals("/user/profile", response);
@@ -76,6 +78,7 @@ class UserControllerTest {
     @Test
     public void getUser_anotherUser_returnErrorPageNameAndErrorText() {
         var model = mock(Model.class);
+        var httpResponse = mock(HttpServletResponse.class);
         var id = 3;
         var user = new User(3, "user3", "Михаил", "Никушин", "22233344");
         var userDetails = new org.springframework.security.core.userdetails.User(
@@ -83,8 +86,9 @@ class UserControllerTest {
 
         doReturn(user).when(userService).getUserById(3);
 
-        var response = userController.getUser(model, id, userDetails);
+        var response = userController.getUser(model, id, userDetails, httpResponse);
 
+        verify(httpResponse, times(1)).setStatus(403);
         verify(userService, times(1)).getUserById(3);
         verify(model, times(1)).addAttribute("error", "Страница данного пользователя недоступна");
         assertEquals("error", response);

@@ -48,9 +48,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public void updateUser(int id, User updatedUser) {
         updatedUser.setUserId(id);
-        updatedUser.setPassword(userRepository.findById(id).get().getPassword());
-        var user = userRepository.findById(id);
-        updatedUser.setRoles(user.get().getRoles());
+        var user = userRepository.findById(id).get();
+        updatedUser.setPassword(user.getPassword());
+        updatedUser.setRoles(user.getRoles());
         userRepository.save(updatedUser);
     }
 

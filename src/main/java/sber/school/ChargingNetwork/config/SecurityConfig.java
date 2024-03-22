@@ -56,7 +56,7 @@ public class SecurityConfig {
                 .authorizeRequests()
                     .mvcMatchers("/login", "/error", "/logout").permitAll().and()
                 .authorizeRequests()
-                    .antMatchers(GET, "/user/*").authenticated()
+                    .regexMatchers(GET, "/user/(\\d+)").authenticated()
                     .antMatchers("/user").hasAnyRole("ADMIN", "MANAGER_USER")
                     .mvcMatchers("/user/**").hasAnyRole("ADMIN", "MANAGER_USER")
                     .mvcMatchers("/role/**").hasRole("ADMIN").and()

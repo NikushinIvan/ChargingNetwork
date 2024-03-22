@@ -13,6 +13,12 @@
             <input type="text" th:name="stationName" th:field="*{stationName}" placeholder="Название">
         </div>
         <div>
+            <input type="text" th:name="login" th:field="*{login}" placeholder="Логин">
+        </div>
+        <div>
+            <input type="text" th:name="password" th:field="*{password}" placeholder="Пароль", min="4">
+        </div>
+        <div>
             <select th:field="*{address}">
                 <option th:each="a: ${addresses}"
                         th:text="${a}"

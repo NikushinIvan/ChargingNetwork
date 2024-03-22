@@ -171,4 +171,29 @@ class UserServiceImplTest {
 
         verify(userRepository).findByFirstNameAndLastName("Иван", "Серый");
     }
+
+    @Test
+    public void getUserByUserName_validUsername_returnUser() {
+        var username = "user1";
+        var user = mock(User.class);
+
+        doReturn(user).when(userRepository).findByUsername("user1");
+
+        var result = userService.getUserByUsername(username);
+
+        verify(userRepository).findByUsername("user1");
+        assertEquals(user, result);
+    }
+
+    @Test
+    public void getUserByUserName_invalidUsername_throwNoSuchElementException() {
+        var username = "user2";
+        var user = mock(User.class);
+
+        doThrow(NoSuchElementException.class).when(userRepository).findByUsername("user2");
+
+        assertThrows(NoSuchElementException.class, () -> userService.getUserByUsername(username));
+
+        verify(userRepository).findByUsername("user2");
+    }
 }

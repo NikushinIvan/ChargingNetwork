@@ -35,12 +35,14 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public String getUser(Model model, @PathVariable int id, @AuthenticationPrincipal UserDetails userDetails) {
+    public String getUser(Model model, @PathVariable int id, @AuthenticationPrincipal UserDetails userDetails,
+                          HttpServletResponse response) {
         var user = userService.getUserById(id);
         if (userDetails.getUsername().equals(user.getUsername())) {
             model.addAttribute("user", user);
             return "/user/profile";
         } else {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             model.addAttribute("error", "Страница данного пользователя недоступна");
             return "error";
         }

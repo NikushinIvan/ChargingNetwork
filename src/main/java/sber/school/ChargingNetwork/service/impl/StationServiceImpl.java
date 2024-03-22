@@ -1,5 +1,6 @@
 package sber.school.ChargingNetwork.service.impl;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import sber.school.ChargingNetwork.dto.StationState;
 import sber.school.ChargingNetwork.model.station.Station;
@@ -18,13 +19,18 @@ public class StationServiceImpl implements StationService {
     private final TelegramBotService telegramBotService;
     private final StationRepository stationRepository;
 
-    public StationServiceImpl(TelegramBotService telegramBotService, StationRepository stationRepository) {
+    private final PasswordEncoder passwordEncoder;
+
+
+    public StationServiceImpl(TelegramBotService telegramBotService, StationRepository stationRepository, PasswordEncoder passwordEncoder) {
         this.telegramBotService = telegramBotService;
         this.stationRepository = stationRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public Station saveStation(Station station) {
+        station.setPassword(passwordEncoder.encode(station.getPassword()));
         return stationRepository.save(station);
     }
 
@@ -46,7 +52,10 @@ public class StationServiceImpl implements StationService {
     @Override
     public void updateStation(int id, Station updatedStation) {
         updatedStation.setStationId(id);
-        updatedStation.setVendor(stationRepository.findById(id).get().getVendor());
+        var station = stationRepository.findById(id).get();
+        updatedStation.setLogin(station.getLogin());
+        updatedStation.setPassword(station.getPassword());
+        updatedStation.setVendor(station.getVendor());
         stationRepository.save(updatedStation);
     }
 
