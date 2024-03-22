@@ -20,7 +20,7 @@ import sber.school.ChargingNetwork.service.UserService;
 
 import java.util.List;
 
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @WebMvcTest(UserController.class)
 @Import(SecurityConfig.class)
@@ -237,23 +237,27 @@ class UserControllerIntegrationTest {
     @WithMockUser(username = "user1", roles = "ADMIN")
     public void updateUser_admin_returnRedirect() throws Exception {
         mockMvc
-                .perform(MockMvcRequestBuilders.put("/user/3"))
+                .perform(MockMvcRequestBuilders.put("/user/3").flashAttr("user", user3))
                 .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
+
+        verify(userService, times(1)).updateUser(3, user3);
     }
 
     @Test
     @WithMockUser(username = "user2", roles = "MANAGER_USER")
     public void updateUser_managerUser_returnRedirect() throws Exception {
         mockMvc
-                .perform(MockMvcRequestBuilders.put("/user/3"))
+                .perform(MockMvcRequestBuilders.put("/user/3").flashAttr("user", user3))
                 .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
+
+        verify(userService, times(1)).updateUser(3, user3);
     }
 
     @Test
     @WithMockUser(username = "user3", roles = "MANAGER_STATION")
     public void updateUser_managerStation_return403() throws Exception {
         mockMvc
-                .perform(MockMvcRequestBuilders.put("/user/3"))
+                .perform(MockMvcRequestBuilders.put("/user/3").flashAttr("user", user3))
                 .andExpect(MockMvcResultMatchers.status().isForbidden());
     }
 
@@ -262,7 +266,7 @@ class UserControllerIntegrationTest {
     public void updateUser_anonymous_return302() throws Exception {
 
         mockMvc
-                .perform(MockMvcRequestBuilders.put("/user/3"))
+                .perform(MockMvcRequestBuilders.put("/user/3").flashAttr("user", user3))
                 .andExpect(MockMvcResultMatchers.status().is3xxRedirection());
     }
 

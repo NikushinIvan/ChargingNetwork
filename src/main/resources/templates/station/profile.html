@@ -20,7 +20,7 @@
     </tr>
     <tr>
       <th>Менеджер станции</th>
-      <td th:text="|${station.manager.firstName} ${station.manager.lastName}|"></td>
+      <td th:if="${station.manager != null}" th:text="|${station.manager.firstName} ${station.manager.lastName}|"></td>
     </tr>
     <tr>
       <th>Поставщик</th>
