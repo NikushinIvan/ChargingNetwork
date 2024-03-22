@@ -13,7 +13,7 @@
         <tr>
             <th>Имя</th>
             <th>Фамилия</th>
-            <th>Права доступа</th>
+            <th>Должность</th>
         </tr>
         </thead>
         <tbody>
@@ -22,7 +22,7 @@
             <td th:text="${user.lastName}">lastName</td>
             <td>
                 <span th:each="role: ${user.roles}"
-                      th:with="roleName=' ' + ${role.roleName} + ' '"
+                      th:with="roleName=' ' + ${role.description} + ' '"
                       th:text="${roleName}">
                 </span>
             </td>

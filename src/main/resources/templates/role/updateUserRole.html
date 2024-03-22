@@ -20,10 +20,10 @@
         <td th:text="${user.lastName}"></td>
       </tr>
       <tr>
-        <th>Права доступа пользователя</th>
+        <th>Должность пользователя</th>
         <td th:each="role: ${user.roles}">
           <form th:action="@{/role/{userId}/{roleId}(userId=${user.userId}, roleId=${role.roleId})}" th:method="delete">
-            <input type="submit" th:value="${role.roleName}">
+            <input type="submit" th:value="${role.description}">
           </form>
         </td>
       </tr>
@@ -31,7 +31,7 @@
         <th>Добавить права доступа</th>
         <td th:each="role: ${roles}">
           <form th:action="@{/role/{userId}/{roleId}(userId=${user.userId}, roleId=${role.roleId})}" th:method="put">
-            <input type="submit" th:value="${role.roleName}">
+            <input type="submit" th:value="${role.description}">
           </form>
         </td>
       </tr>

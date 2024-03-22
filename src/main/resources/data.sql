@@ -1,7 +1,7 @@
 INSERT INTO Roles (role_name, description)
 VALUES ('ROLE_ADMIN', 'Администратор'),
-('ROLE_MANAGER_USER', 'куратор пользователей'),
-('ROLE_MANAGER_STATION', 'диспетчер станций');
+('ROLE_MANAGER_USER', 'Куратор пользователей'),
+('ROLE_MANAGER_STATION', 'Диспетчер станций');
 
 INSERT INTO Users (username, password, chat_id, first_name, last_name, uid)
 VALUES ('admin', '$2a$12$S34BUzdZz1JscJ2SdronNO9aVDyAQkiU6rHKn7a7EbmTt.78Q9XNC', NULL, 'admin', 'admin', NULL),
