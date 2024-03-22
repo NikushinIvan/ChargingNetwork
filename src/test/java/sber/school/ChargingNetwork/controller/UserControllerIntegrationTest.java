@@ -19,7 +19,6 @@ import sber.school.ChargingNetwork.service.ApplicationUserDetailsService;
 import sber.school.ChargingNetwork.service.UserService;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import static org.mockito.Mockito.when;
 
