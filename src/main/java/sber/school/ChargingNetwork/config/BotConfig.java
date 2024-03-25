@@ -4,6 +4,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 
+/**
+ *
+ * Конфигурационный класс, содержит данные Телеграм-бота
+ *
+ */
 @Configuration
 @PropertySource("application.yml")
 public class BotConfig {

@@ -3,6 +3,11 @@ package sber.school.ChargingNetwork.model.user;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+/**
+ *
+ * Сущность роли пользователя
+ *
+ */
 @Entity
 @Table(name = "Roles")
 public class Role {

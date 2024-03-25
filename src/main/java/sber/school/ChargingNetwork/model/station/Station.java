@@ -5,6 +5,11 @@ import sber.school.ChargingNetwork.model.user.User;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+/**
+ *
+ * Сущность зарядной станции
+ *
+ */
 @Entity
 @Table(name = "Stations")
 public class Station {

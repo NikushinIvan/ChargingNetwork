@@ -11,6 +11,11 @@ import sber.school.ChargingNetwork.service.UserService;
 
 import java.util.stream.Collectors;
 
+/**
+ *
+ * Контроллер домашней страницы
+ *
+ */
 @Controller
 @RequestMapping("/")
 public class HomeController {
@@ -21,6 +26,16 @@ public class HomeController {
         this.userService = userService;
     }
 
+    /**
+     *
+     * Метод обрабатывает GET запросы к корневому URL
+     *
+     * @param model - Передает в представление данные пользователя.
+     *              Атрибут user - объект пользователя,
+     *              Атрибут roles - описания ролей данного пользователя
+     * @param userDetails - данные аутентификации пользователя, который обращается к странице
+     * @return Строка с названием представления
+     */
     @GetMapping
     public String getHomePage(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         var user = userService.getUserByUsername(userDetails.getUsername());

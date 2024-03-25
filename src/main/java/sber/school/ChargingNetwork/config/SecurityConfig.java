@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,6 +15,11 @@ import sber.school.ChargingNetwork.service.ApplicationUserDetailsService;
 
 import static org.springframework.http.HttpMethod.GET;
 
+/**
+ *
+ * Конфигурациооный класс контекста безопасности приложения
+ *
+ */
 @Configuration
 public class SecurityConfig {
 
@@ -28,8 +34,11 @@ public class SecurityConfig {
 
     /**
      *
-     * Цепочка фильтров для аутентификации и авторизации зарядных станций
+     * Метод аутентификиции и авторизации зарядных станций
      *
+     * @param http - Объект настройки веб-безопасности для определенных HTTP-запросов
+     * @return Цепочка фильтров для аутентификации и авторизации зарядных станций
+     * @throws Exception
      */
     @Bean
     @Order(1)
@@ -49,8 +58,11 @@ public class SecurityConfig {
 
     /**
      *
-     * Цепочка фильтров для аутентификации и авторизации пользователей
+     * Метод аутентификиции и авторизации пользователей
      *
+     * @param http - Объект настройки веб-безопасности для определенных HTTP-запросов
+     * @return Цепочка фильтров для аутентификации и авторизации пользователей
+     * @throws Exception
      */
     @Bean
     @Order(2)
@@ -80,6 +92,12 @@ public class SecurityConfig {
                 .build();
     }
 
+    /**
+     *
+     * Метод создает бин кодировщика пароля.
+     *
+     * @return Объект класса, реализующий интерфейс PasswordEncoder
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

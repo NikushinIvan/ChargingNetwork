@@ -7,6 +7,11 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
+/**
+ *
+ * Сущность зарядной сессии
+ *
+ */
 @Entity
 @Table(name = "Charge_sessions")
 public class ChargeSession {

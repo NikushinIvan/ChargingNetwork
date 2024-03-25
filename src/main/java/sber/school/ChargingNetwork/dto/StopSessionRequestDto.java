@@ -1,5 +1,10 @@
 package sber.school.ChargingNetwork.dto;
 
+/**
+ *
+ * Объект данных запроса станции на завершение зарядной сессии
+ *
+ */
 public class StopSessionRequestDto {
     private int chargeSessionId;
     private String stopReason;

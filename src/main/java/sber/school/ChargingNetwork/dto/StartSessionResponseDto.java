@@ -1,5 +1,10 @@
 package sber.school.ChargingNetwork.dto;
 
+/**
+ *
+ * Объект данных ответа сервера на запрос начала зарядной сессии
+ *
+ */
 public class StartSessionResponseDto {
 
     private ResponseStatus status;

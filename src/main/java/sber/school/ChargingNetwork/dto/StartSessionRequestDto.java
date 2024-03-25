@@ -1,5 +1,10 @@
 package sber.school.ChargingNetwork.dto;
 
+/**
+ *
+ * Объект данных запроса станции на начало зарядной сессии
+ *
+ */
 public class StartSessionRequestDto {
     private String uid;
 

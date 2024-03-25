@@ -6,6 +6,11 @@ import org.springframework.web.bind.annotation.*;
 import sber.school.ChargingNetwork.service.RoleService;
 import sber.school.ChargingNetwork.service.UserService;
 
+/**
+ *
+ * Контроллер ролей
+ *
+ */
 @Controller
 @RequestMapping("role")
 public class RoleController {
@@ -18,6 +23,16 @@ public class RoleController {
         this.userService = userService;
     }
 
+    /**
+     *
+     * Метод передает информацию о ролях пользователя
+     *
+     * @param id - Содержится в URL, ID станции
+     * @param model - Передает в представление данные пользователя.
+     *               Атрибут user - объект пользователя,
+     *               Атрибут roles - объекты ролей данного пользователя
+     * @return Строка с названием представления
+     */
     @GetMapping("/{id}")
     public String showUpdateUserRolePage(@PathVariable int id, Model model) {
         var user = userService.getUserById(id);
@@ -26,6 +41,14 @@ public class RoleController {
         return "/role/updateUserRole";
     }
 
+    /**
+     *
+     * Метод удаляет роль из списка ролей пользователя
+     *
+     * @param userId - Содержится в URL, ID пользователя
+     * @param roleId - Содержится в URL, ID роли
+     * @return Перенаправление на страницу изменения ролей пользователя
+     */
     @DeleteMapping("/{userId}/{roleId}")
     public String deleteRoleFromUser(@PathVariable int userId, @PathVariable int roleId) {
         var user = userService.getUserById(userId);
@@ -35,6 +58,14 @@ public class RoleController {
         return "redirect:/role/" + userId;
     }
 
+    /**
+     *
+     * Метод добавляет роль к списку ролей пользователя
+     *
+     * @param userId - Содержится в URL, ID пользователя
+     * @param roleId - Содержится в URL, ID роли
+     * @return Перенаправление на страницу изменения ролей пользователя
+     */
     @PutMapping("/{userId}/{roleId}")
     public String addRoleFromUser(@PathVariable int userId, @PathVariable int roleId) {
         var user = userService.getUserById(userId);

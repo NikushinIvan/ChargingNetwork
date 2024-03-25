@@ -1,5 +1,10 @@
 package sber.school.ChargingNetwork.dto;
 
+/**
+ *
+ * Объект данных ответа сервера на запрос завершения зарядной сессии
+ *
+ */
 public class StopSessionResponseDto {
 
     private ResponseStatus status;

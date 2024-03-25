@@ -8,6 +8,11 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 import sber.school.ChargingNetwork.service.impl.TelegramBotServiceImpl;
 
+/**
+ *
+ * Класс инициализауии Телеграм-бота
+ *
+ */
 @Component
 public class BotInitializer {
 
@@ -17,6 +22,12 @@ public class BotInitializer {
         this.telegramBot = telegramBot;
     }
 
+    /**
+     *
+     * Метод инициализации Телеграм-бота. Выполняется при инициализации или обновлении контекста приложения.
+     * Регистрирует сервис бота в TelegramBotsApi
+     *
+     */
     @EventListener({ContextRefreshedEvent.class})
     public void init() {
         try {

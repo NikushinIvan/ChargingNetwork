@@ -43,7 +43,7 @@ public class TelegramBotServiceImpl extends TelegramLongPollingBot implements Te
      *
      * Метод, обрабатывающий входящие сообщения в чате телеграм-бота
      *
-     * @param update - параметр, содержащий информацию о событии чата, в том числе и тело сообщения
+     * @param update - Параметр, содержащий информацию о событии чата, в том числе и тело сообщения
      */
     @Override
     public void onUpdateReceived(Update update) {
@@ -89,7 +89,7 @@ public class TelegramBotServiceImpl extends TelegramLongPollingBot implements Te
      * отправлять уведомления о неисправности
      *
      * @param firstNameAndLastName - Имя и фамилия пользователя
-     * @param chatId - id используемого чата
+     * @param chatId - ID используемого чата
      * @return - Результат добавления подписки: true - подписка добавлена, false - подписка не добавлена
      */
     private boolean addNewManagerToBot(String firstNameAndLastName, Long chatId) {
@@ -105,12 +105,11 @@ public class TelegramBotServiceImpl extends TelegramLongPollingBot implements Te
                 user.setChatId(chatId);
                 userService.updateUser(user.getUserId(), user);
                 return true;
-            } else {
-                return false;
             }
         } catch (NoSuchElementException e) {
             return false;
         }
+        return false;
     }
 
     private void sendMessage(Long chatId, String textToSend){

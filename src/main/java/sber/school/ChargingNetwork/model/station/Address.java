@@ -3,6 +3,11 @@ package sber.school.ChargingNetwork.model.station;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+/**
+ *
+ * Сущность адреса зарядной станции
+ *
+ */
 @Entity
 @Table(name = "Addresses")
 public class Address {

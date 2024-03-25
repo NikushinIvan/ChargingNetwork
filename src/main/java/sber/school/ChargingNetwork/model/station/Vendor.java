@@ -3,6 +3,11 @@ package sber.school.ChargingNetwork.model.station;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+/**
+ *
+ * Сущность компании-поставщика зарядной станции
+ *
+ */
 @Entity
 @Table(name = "Vendors")
 public class Vendor {

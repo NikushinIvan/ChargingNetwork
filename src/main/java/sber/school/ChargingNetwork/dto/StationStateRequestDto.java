@@ -1,5 +1,10 @@
 package sber.school.ChargingNetwork.dto;
 
+/**
+ *
+ * Объект данных состояния станции, передаваемый зарядной станцией серверу
+ *
+ */
 public class StationStateRequestDto {
     private StationState stationState;
 
