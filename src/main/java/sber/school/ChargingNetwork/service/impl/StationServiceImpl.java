@@ -1,5 +1,8 @@
 package sber.school.ChargingNetwork.service.impl;
 
+import org.hibernate.mapping.ValueVisitor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import sber.school.ChargingNetwork.dto.StationState;
@@ -65,21 +68,19 @@ public class StationServiceImpl implements StationService {
     }
 
     @Override
-    public void setStationState(int id, StationState state) {
+    public ResponseEntity<Void> setStationState(int id, StationState state) {
         if (state == null) {
-            throw new NullPointerException("Поле state запроса не должно быть пустым");
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         var station = stationRepository.findById(id);
-        station.ifPresentOrElse(
-                s -> {
-                    s.setStationState(state.name());
-                    stationRepository.save(s);
-                    if (state == ERROR || state == DISCONNECT) {
-                        telegramBotService.sendStationError(s);
-                    }
-                },
-                () -> {
-                    throw new NoSuchElementException("Станция не найдена");
-                });
+        if (station.isPresent()) {
+            station.get().setStationState(state.name());
+            stationRepository.save(station.get());
+            if (state == ERROR || state == DISCONNECT) {
+                telegramBotService.sendStationError(station.get());
+            }
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 }

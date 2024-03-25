@@ -6,6 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import sber.school.ChargingNetwork.dto.*;
 import sber.school.ChargingNetwork.service.SessionService;
 import sber.school.ChargingNetwork.service.StationService;
@@ -33,7 +34,7 @@ class ChargerControllerTest {
         var request = new StationStateRequestDto(WAIT);
         var id = 1;
 
-        doNothing().when(stationService).setStationState(1, WAIT);
+        doReturn(new ResponseEntity<Void>(HttpStatus.OK)).when(stationService).setStationState(1, WAIT);
 
         var response = chargerController.setStationState(request, id);
 
@@ -46,7 +47,7 @@ class ChargerControllerTest {
         var request = new StationStateRequestDto();
         var id = 1;
 
-        doThrow(NullPointerException.class).when(stationService).setStationState(1, null);
+        doReturn(new ResponseEntity<Void>(HttpStatus.BAD_REQUEST)).when(stationService).setStationState(1, null);
 
         var response = chargerController.setStationState(request, id);
 

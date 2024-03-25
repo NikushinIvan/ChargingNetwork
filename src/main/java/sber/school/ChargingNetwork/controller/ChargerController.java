@@ -24,12 +24,7 @@ public class ChargerController {
     @PostMapping("/{id}")
     public ResponseEntity<Void> setStationState(@RequestBody StationStateRequestDto stationState,
                                                 @PathVariable int id) {
-        try {
-            stationService.setStationState(id, stationState.getStationState());
-        } catch (NullPointerException | NoSuchElementException e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return stationService.setStationState(id, stationState.getStationState());
     }
 
     @PostMapping("/{id}/start")

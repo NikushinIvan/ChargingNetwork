@@ -5,6 +5,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import sber.school.ChargingNetwork.model.station.Station;
 import sber.school.ChargingNetwork.model.station.Vendor;
@@ -140,8 +142,9 @@ class StationServiceImplTest {
 
         doReturn(Optional.of(station)).when(stationRepository).findById(7);
 
-        stationService.setStationState(id, ERROR);
+        var response = stationService.setStationState(id, ERROR);
 
+        assertEquals(HttpStatus.OK, response.getStatusCode());
         verify(stationRepository, times(1)).findById(7);
         verify(station, times(1)).setStationState(ERROR.name());
         verify(stationRepository, times(1)).save(station);
@@ -152,7 +155,9 @@ class StationServiceImplTest {
     public void setStationState_nullState() {
         var id = 8;
 
-        assertThrows(NullPointerException.class, () -> stationService.setStationState(id, null));
+        var response = stationService.setStationState(id, null);
+
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
     }
 
     @Test
@@ -161,8 +166,9 @@ class StationServiceImplTest {
 
         doReturn(Optional.empty()).when(stationRepository).findById(8);
 
-        assertThrows(NoSuchElementException.class, () -> stationService.setStationState(id, CHARGE));
+        var response = stationService.setStationState(id, WAIT);
 
+        assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         verify(stationRepository, times(1)).findById(8);
         verify(stationRepository, never()).save(any(Station.class));
         verify(telegramBotService, never()).sendStationError(any(Station.class));
