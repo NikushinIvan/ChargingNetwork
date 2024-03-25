@@ -11,13 +11,13 @@
     <h1>Редактирование пользователя</h1>
     <form th:action="@{/user/{id}(id=${user.userId})}" th:method="PUT" th:object="${user}">
       <div>
-        <input type="text" th:value="*{username}" th:name="username" th:field="*{username}" placeholder="Логин">
+        <input type="text" th:value="*{username}" th:name="username" th:field="*{username}" placeholder="Логин" minlength="4" required="required">
       </div>
       <div>
-        <input type="text" th:value="*{firstName}" th:name="firstName" th:field="*{firstName}" placeholder="Имя">
+        <input type="text" th:value="*{firstName}" th:name="firstName" th:field="*{firstName}" placeholder="Имя" minlength="4" required="required">
       </div>
       <div>
-        <input type="text" th:value="*{lastName}" th:name="lastName" th:field="*{lastName}" placeholder="Фамилия">
+        <input type="text" th:value="*{lastName}" th:name="lastName" th:field="*{lastName}" placeholder="Фамилия" minlength="3" required="required">
       </div>
       <div>
         <input type="text" th:value="*{uid}" th:name="uid" th:field="*{uid}" placeholder="UID RFID карты" minlength="8"

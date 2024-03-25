@@ -10,13 +10,13 @@
     <h1>Создание станции</h1>
     <form th:action="@{/station}" th:method="POST" th:object="${station}">
         <div>
-            <input type="text" th:name="stationName" th:field="*{stationName}" placeholder="Название">
+            <input type="text" th:name="stationName" th:field="*{stationName}" placeholder="Название" minlength="4" required="required">
         </div>
         <div>
-            <input type="text" th:name="login" th:field="*{login}" placeholder="Логин">
+            <input type="text" th:name="login" th:field="*{login}" placeholder="Логин" minlength="4" required="required">
         </div>
         <div>
-            <input type="text" th:name="password" th:field="*{password}" placeholder="Пароль", min="4">
+            <input type="text" th:name="password" th:field="*{password}" placeholder="Пароль" minlength="4" required="required">
         </div>
         <div>
             <select th:field="*{address}">

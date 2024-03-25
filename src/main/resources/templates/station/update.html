@@ -10,7 +10,7 @@
   <h1>Редактирование станции</h1>
   <form th:action="@{/station/{id}(id=${station.stationId})}" th:method="PUT" th:object="${station}">
     <div>
-      <input type="text" th:name="stationName" th:field="*{stationName}" placeholder="Название">
+      <input type="text" th:name="stationName" th:field="*{stationName}" placeholder="Название" minlength="4" required="required">
     </div>
     <div>
       <select th:field="*{address}">

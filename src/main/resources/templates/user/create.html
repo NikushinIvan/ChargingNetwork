@@ -10,16 +10,16 @@
   <h1>Создание пользователя</h1>
   <form th:action="@{/user}" th:method="POST" th:object="${user}">
     <div>
-      <input type="text" th:name="username" th:field="*{username}" placeholder="Логин">
+      <input type="text" th:name="username" th:field="*{username}" placeholder="Логин" minlength="4" required="required">
     </div>
     <div>
-      <input type="text" th:name="password" th:field="*{password}" placeholder="Пароль", min="4">
+      <input type="text" th:name="password" th:field="*{password}" placeholder="Пароль" minlength="4" required="required">
     </div>
     <div>
-      <input type="text" th:name="firstName" th:field="*{firstName}" placeholder="Имя">
+      <input type="text" th:name="firstName" th:field="*{firstName}" placeholder="Имя" minlength="3" required="required">
     </div>
     <div>
-      <input type="text" th:name="lastName" th:field="*{lastName}" placeholder="Фамилия">
+      <input type="text" th:name="lastName" th:field="*{lastName}" placeholder="Фамилия" minlength="3" required="required">
     </div>
     <div>
       <input type="text" th:name="uid" th:field="*{uid}" placeholder="UID RFID карты" minlength="8" maxlength="8">
