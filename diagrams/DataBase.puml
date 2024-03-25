@@ -1,10 +1,14 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 
-entity User {
+entity Users {
     user_id
     --
     username
+    --
+    password
+    --
+    chat_id
     --
     first_name
     --
@@ -13,27 +17,23 @@ entity User {
     uid
 }
 
-entity User_password {
-    password_id
+entity Users_roles {
+    user_role_id
     --
-    user_id
-    --
-    password
-}
-
-entity User_role {
     role_id
     --
     user_id
 }
 
-entity Role {
+entity Roles {
     role_id
     --
     role_name
+    --
+    description
 }
 
-entity Address {
+entity Addresses {
     address_id
     --
     city
@@ -43,7 +43,7 @@ entity Address {
     house_number
 }
 
-entity Vendor {
+entity Vendors {
     vendor_id
     --
     company_name
@@ -51,8 +51,14 @@ entity Vendor {
     phone_support_service
 }
 
-entity Station {
+entity Stations {
    station_id
+   --
+   station_name
+   --
+   login
+   --
+   password
    --
    manager_id
    --
@@ -63,7 +69,7 @@ entity Station {
    station_state
 }
 
-entity Charge_session {
+entity Charge_sessions {
     session_id
     --
     user_id
@@ -77,13 +83,12 @@ entity Charge_session {
     stop_reason
 }
 
-User -- Station
-User -- User_password
-User -- User_role
-User_role -- Role
-User -- Charge_session
-Address -- Station
-Vendor -- Station
-Station -- Charge_session
+Users -- Stations
+Users -- Users_roles
+Users_roles -- Roles
+Users -- Charge_sessions
+Addresses -- Stations
+Vendors -- Stations
+Stations -- Charge_sessions
 
 @enduml
