@@ -19,8 +19,8 @@ VALUES ('Рязань', 'Каширина', 1),
 ('Рязань', 'Ленина', 5);
 
 INSERT INTO Vendors(company_name, phone_support_service)
-VALUES ('ООО Парус электро', '+79001112233'),
-('Yablochkovtech', '+79100001122');
+VALUES ('ООО Парус электро', '89001112233'),
+('Yablochkovtech', '89100001122');
 
 INSERT INTO Stations (station_name, login, password, manager_id, vendor_id, address_id, station_state)
 VALUES ('ЭЗС7КВ1', 'teststation1', '$2a$12$0ZMKp1pbK9XsIi1uvGC6puhWoFpAg0u/4eJhtoZ81Nzdl9eac1Xu.', 3, 1, 1, NULL),

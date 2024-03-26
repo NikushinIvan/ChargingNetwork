@@ -95,20 +95,17 @@ public class TelegramBotServiceImpl extends TelegramLongPollingBot implements Te
     private boolean addNewManagerToBot(String firstNameAndLastName, Long chatId) {
         try {
             var managerData = firstNameAndLastName.split(" ");
-            if (managerData.length != 2) {
-                return false;
+            if (managerData.length == 2) {
+                var user = userService.getUserByFirstNameAndLastName(managerData[1], managerData[0]);
+                var hasRole = user.getRoles().stream()
+                        .anyMatch(role -> "ROLE_MANAGER_STATION".equals(role.getRoleName()));
+                if (hasRole) {
+                    user.setChatId(chatId);
+                    userService.updateUser(user.getUserId(), user);
+                    return true;
+                }
             }
-            var user = userService.getUserByFirstNameAndLastName(managerData[1], managerData[0]);
-            var hasRole = user.getRoles().stream()
-                    .anyMatch(role -> "ROLE_MANAGER_STATION".equals(role.getRoleName()));
-            if (hasRole) {
-                user.setChatId(chatId);
-                userService.updateUser(user.getUserId(), user);
-                return true;
-            }
-        } catch (NoSuchElementException e) {
-            return false;
-        }
+        } catch (NoSuchElementException ignored) {}
         return false;
     }
 

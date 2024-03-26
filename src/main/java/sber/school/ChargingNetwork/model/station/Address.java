@@ -1,7 +1,11 @@
 package sber.school.ChargingNetwork.model.station;
 
+import org.springframework.stereotype.Service;
+
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -16,10 +20,13 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int addressId;
     @NotNull
+    @Size(min = 1)
     private String city;
     @NotNull
+    @Size(min = 1)
     private String street;
     @NotNull
+    @Size(min = 1)
     private int houseNumber;
 
     public Address() {

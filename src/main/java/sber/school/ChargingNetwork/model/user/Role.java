@@ -1,7 +1,9 @@
 package sber.school.ChargingNetwork.model.user;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -16,6 +18,7 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int roleId;
     @NotNull
+    @Size(min = 3)
     private String roleName;
     private String description;
 

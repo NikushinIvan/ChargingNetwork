@@ -3,7 +3,9 @@ package sber.school.ChargingNetwork.model.station;
 import sber.school.ChargingNetwork.model.user.User;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -18,10 +20,13 @@ public class Station {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int stationId;
     @NotNull
+    @Size(min = 4)
     private String stationName;
     @NotNull
+    @Size(min = 4)
     private String login;
     @NotNull
+    @Size(min = 4)
     private String password;
     @ManyToOne
     @JoinColumn(name = "manager_id")

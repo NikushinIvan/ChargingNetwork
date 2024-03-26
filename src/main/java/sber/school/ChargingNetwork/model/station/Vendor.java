@@ -1,7 +1,10 @@
 package sber.school.ChargingNetwork.model.station;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -16,8 +19,10 @@ public class Vendor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int vendorId;
     @NotNull
+    @Size(min = 1)
     private String companyName;
     @NotNull
+    @Size(min = 11, max = 11)
     private String phoneSupportService;
 
     public Vendor() {

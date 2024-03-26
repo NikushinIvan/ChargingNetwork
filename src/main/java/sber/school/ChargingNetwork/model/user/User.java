@@ -1,6 +1,7 @@
 package sber.school.ChargingNetwork.model.user;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Set;
@@ -18,12 +19,16 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
     @NotNull
+    @Size(min = 4)
     private String username;
+    @Size(min = 4)
     private String password;
     private Long chatId;
     @NotNull
+    @Size(min = 3)
     private String firstName;
     @NotNull
+    @Size(min = 3)
     private String lastName;
     @Size(max = 8, message = "Неверная длина UID")
     private String uid;
