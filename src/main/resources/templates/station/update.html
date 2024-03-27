@@ -1,41 +1,50 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
   <meta charset="UTF-8">
   <title>Сеть ЭЗС</title>
 </head>
 <body>
-<div>
+<div class="container">
   <h1>Редактирование станции</h1>
   <form th:action="@{/station/{id}(id=${station.stationId})}" th:method="PUT" th:object="${station}">
-    <div>
-      <input type="text" th:name="stationName" th:field="*{stationName}" placeholder="Название" minlength="4" required="required">
-    </div>
-    <div>
-      <select th:field="*{address}">
-        <option th:each="a: ${addresses}"
-                th:text="${a}"
-                th:value="${a.addressId}">Address
-        </option>
-      </select>
-    </div>
-    <div>
-      <select th:field="*{manager}">
-        <option th:each="user: ${users}"
-                th:text="|${user.firstName} ${user.lastName}|"
-                th:value="${user.userId}">user
-        </option>
-      </select>
-    </div>
-    <button type="submit">Сохранить изменения</button><br/>
+    <table>
+      <tbody>
+      <tr>
+        <th>Название</th>
+        <td><input type="text" th:name="stationName" th:field="*{stationName}" placeholder="Название" minlength="4"
+                   required="required"></td>
+      </tr>
+      <tr>
+        <th>Адрес</th>
+        <td><select th:field="*{address}">
+          <option th:each="a: ${addresses}"
+                  th:text="${a}"
+                  th:value="${a.addressId}">Address
+          </option>
+        </select></td>
+      </tr>
+      <tr>
+        <th>Диспетчер</th>
+        <td><select th:field="*{manager}">
+          <option th:each="user: ${users}"
+                  th:text="|${user.firstName} ${user.lastName}|"
+                  th:value="${user.userId}">user
+          </option>
+        </select></td>
+      </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Сохранить изменения</button>
+    <br/>
   </form>
-  <div>
-    <form th:action="@{/station/{id}(id=${station.stationId})}" th:method="delete">
-      <button>Удалить станцию</button>
-    </form>
-  </div>
-  <a th:href="@{/station}">К списку станций</a>
+  <form th:action="@{/station/{id}(id=${station.stationId})}" th:method="delete">
+    <button class="btn btn-lg btn-primary btn-block">Удалить станцию</button>
+  </form>
+  <form class="form" th:action="@{/station}" th:method="get">
+    <button class="btn btn-lg btn-primary btn-block">К списку станций</button>
+  </form>
 </div>
 </body>
 </html>

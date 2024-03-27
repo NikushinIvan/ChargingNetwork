@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
   <meta charset="UTF-8">
   <title>Сеть ЭЗС</title>
 </head>
 <body>
-<div>
+<div class="container">
   <div>
     <h1>Изменить права доступа пользователя</h1>
     <table>
@@ -40,8 +40,10 @@
       </tr>
       </tbody>
     </table>
+    <form class="form" th:action="@{/user}" th:method="get">
+      <button class="btn btn-lg btn-primary btn-block">К списку пользователей</button>
+    </form>
   </div>
-  <a th:href="@{/user}">К списку пользователей</a>
 </div>
 </body>
 </html>

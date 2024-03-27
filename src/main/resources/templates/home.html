@@ -1,22 +1,32 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
   <meta charset="UTF-8">
   <title>Сеть ЭЗС</title>
 </head>
 <body>
-<div>
+<div class="container">
   <h1>Главная страница</h1>
-  <a th:href="@{/user/{id}(id=${user.getUserId})}">Профиль</a>
-  <a th:href="@{/station}">Список станций</a>
+  <form class="form" th:action="@{/user/{id}(id=${user.getUserId})}" th:method="get">
+    <button class="btn btn-lg btn-primary btn-block">Профиль</button>
+  </form>
+  <form class="form" th:action="@{/station}" th:method="get">
+    <button class="btn btn-lg btn-primary btn-block">Список станций</button>
+  </form>
   <th:block th:if="${roles.contains('ROLE_ADMIN') or roles.contains('ROLE_MANAGER_USER')}">
-    <a th:href="@{/user/managerPanel}">Панель управления пользователями</a>
+    <form class="form" th:action="@{/user/managerPanel}" th:method="get">
+      <button class="btn btn-lg btn-primary btn-block">Панель управления пользователями</button>
+    </form>
   </th:block>
   <th:block th:if="${roles.contains('ROLE_ADMIN') or roles.contains('ROLE_MANAGER_STATION')}">
-    <a th:href="@{/station/managerPanel}">Панель управления станциями</a>
+    <form class="form" th:action="@{/station/managerPanel}" th:method="get">
+      <button class="btn btn-lg btn-primary btn-block">Панель управления станциями</button>
+    </form>
   </th:block>
-  <a th:href="@{/logout}">Выход</a>
+  <form class="form" th:action="@{/logout}" th:method="get">
+    <button class="btn btn-lg btn-primary btn-block">Выход</button>
+  </form>
 </div>
 </body>
 </html>

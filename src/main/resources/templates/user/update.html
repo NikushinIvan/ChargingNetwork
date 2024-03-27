@@ -1,43 +1,50 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
   <meta charset="UTF-8">
   <title>Сеть ЭЗС</title>
 </head>
 <body>
-<div>
-  <div>
-    <h1>Редактирование пользователя</h1>
-    <form th:action="@{/user/{id}(id=${user.userId})}" th:method="PUT" th:object="${user}">
-      <div>
-        <input type="text" th:value="*{username}" th:name="username" th:field="*{username}" placeholder="Логин" minlength="4" required="required">
-      </div>
-      <div>
-        <input type="text" th:value="*{firstName}" th:name="firstName" th:field="*{firstName}" placeholder="Имя" minlength="4" required="required">
-      </div>
-      <div>
-        <input type="text" th:value="*{lastName}" th:name="lastName" th:field="*{lastName}" placeholder="Фамилия" minlength="3" required="required">
-      </div>
-      <div>
-        <input type="text" th:value="*{uid}" th:name="uid" th:field="*{uid}" placeholder="UID RFID карты" minlength="8"
-               maxlength="8">
-      </div>
-      <button type="submit">Сохранить изменения</button>
-      <br/>
-    </form>
-  </div>
-  <div>
-    <form th:action="@{/role/{id}(id=${user.userId})}" th:method="get">
-      <button>Изменить права пользователя</button>
-    </form>
-  </div>
-  <div>
-    <form th:action="@{/user/{id}(id=${user.userId})}" th:method="delete">
-      <button>Удалить пользователя</button>
-    </form>
-  </div>
-  <a th:href="@{/user}">К списку пользователей</a>
+<div class="container">
+  <h1>Редактирование пользователя</h1>
+  <form class="form" th:action="@{/user/{id}(id=${user.userId})}" th:method="PUT" th:object="${user}">
+    <table>
+      <tbody>
+      <tr>
+        <th>Логин</th>
+        <td><input type="text" th:value="*{username}" th:name="username" th:field="*{username}" placeholder="Логин"
+                   minlength="4" required="required"></td>
+      </tr>
+      <tr>
+        <th>Имя</th>
+        <td><input type="text" th:value="*{firstName}" th:name="firstName" th:field="*{firstName}" placeholder="Имя"
+                   minlength="4" required="required"></td>
+      </tr>
+      <tr>
+        <th>Фамилия</th>
+        <td><input type="text" th:value="*{lastName}" th:name="lastName" th:field="*{lastName}" placeholder="Фамилия"
+                   minlength="3" required="required"></td>
+      </tr>
+      <tr>
+        <th>UID</th>
+        <td><input type="text" th:value="*{uid}" th:name="uid" th:field="*{uid}" placeholder="UID RFID карты"
+                   minlength="8" maxlength="8"></td>
+      </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-lg btn-primary btn-block">Сохранить изменения</button>
+    <br/>
+  </form>
+  <form th:action="@{/role/{id}(id=${user.userId})}" th:method="get">
+    <button class="btn btn-lg btn-primary btn-block">Изменить права пользователя</button>
+  </form>
+  <form th:action="@{/user/{id}(id=${user.userId})}" th:method="delete">
+    <button class="btn btn-lg btn-primary btn-block">Удалить пользователя</button>
+  </form>
+  <form class="form" th:action="@{/user}" th:method="get">
+    <button class="btn btn-lg btn-primary btn-block">К списку пользователей</button>
+  </form>
 </div>
 </body>
 </html>

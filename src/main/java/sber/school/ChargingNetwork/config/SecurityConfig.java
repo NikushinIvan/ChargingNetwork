@@ -75,7 +75,7 @@ public class SecurityConfig {
                 .mvcMatcher("/**")
                 .csrf().disable()
                 .authorizeRequests()
-                    .mvcMatchers("/login", "/error", "/logout").permitAll().and()
+                    .mvcMatchers("/login", "/error", "/logout", "/css/**").permitAll().and()
                 .authorizeRequests()
                     .regexMatchers(GET, "/user/(\\d+)").authenticated()
                     .antMatchers("/user").hasAnyRole("ADMIN", "MANAGER_USER")

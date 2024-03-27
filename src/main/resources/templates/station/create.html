@@ -1,50 +1,63 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
     <meta charset="UTF-8">
     <title>Сеть ЭЗС</title>
 </head>
 <body>
-<div>
+<div class="container">
     <h1>Создание станции</h1>
     <form th:action="@{/station}" th:method="POST" th:object="${station}">
-        <div>
-            <input type="text" th:name="stationName" th:field="*{stationName}" placeholder="Название" minlength="4" required="required">
-        </div>
-        <div>
-            <input type="text" th:name="login" th:field="*{login}" placeholder="Логин" minlength="4" required="required">
-        </div>
-        <div>
-            <input type="text" th:name="password" th:field="*{password}" placeholder="Пароль" minlength="4" required="required">
-        </div>
-        <div>
-            <select th:field="*{address}">
-                <option th:each="a: ${addresses}"
-                        th:text="${a}"
-                        th:value="${a.addressId}">Address
-                </option>
-            </select>
-        </div>
-        <div>
-            <select th:field="*{vendor}">
-                <option th:each="v: ${vendors}"
-                        th:text="${v.companyName}"
-                        th:value="${v.vendorId}">vendor
-                </option>
-            </select>
-        </div>
-        <div>
-            <select th:field="*{manager}">
-                <option th:each="user: ${users}"
-                        th:text="|${user.firstName} ${user.lastName}|"
-                        th:value="${user.userId}">user
-                </option>
-            </select>
-        </div>
-        <button type="submit">Создать!</button><br/>
+        <table>
+            <tbody>
+            <tr>
+                <th>Название</th>
+                <td><input type="text" th:name="stationName" th:field="*{stationName}" placeholder="Название" minlength="4" required="required"></td>
+            </tr>
+            <tr>
+                <th>Логин</th>
+                <td><input type="text" th:name="login" th:field="*{login}" placeholder="Логин" minlength="4" required="required"></td>
+            </tr>
+            <tr>
+                <th>Пароль</th>
+                <td><input type="text" th:name="password" th:field="*{password}" placeholder="Пароль" minlength="4" required="required"></td>
+            </tr>
+            <tr>
+                <th>Адрес</th>
+                <td><select th:field="*{address}">
+                    <option th:each="a: ${addresses}"
+                            th:text="${a}"
+                            th:value="${a.addressId}">Address
+                    </option>
+                </select></td>
+            </tr>
+            <tr>
+                <th>Поставщик</th>
+                <td><select th:field="*{vendor}">
+                    <option th:each="v: ${vendors}"
+                            th:text="${v.companyName}"
+                            th:value="${v.vendorId}">vendor
+                    </option>
+                </select></td>
+            </tr>
+            <tr>
+                <th>Диспетчер</th>
+                <td><select th:field="*{manager}">
+                    <option th:each="user: ${users}"
+                            th:text="|${user.firstName} ${user.lastName}|"
+                            th:value="${user.userId}">user
+                    </option>
+                </select>
+                </select></td>
+            </tr>
+            </tbody>
+        </table>
+        <button class="btn btn-lg btn-primary btn-block">Создать</button>
     </form>
-    <a th:href="@{/station/managerPanel}">Назад</a>
+    <form class="form" th:action="@{/station/managerPanel}" th:method="get">
+        <button class="btn btn-lg btn-primary btn-block">Назад</button>
+    </form>
 </div>
 </body>
 </html>

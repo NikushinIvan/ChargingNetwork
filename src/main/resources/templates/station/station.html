@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
   <meta charset="UTF-8">
   <title>Сеть ЭЗС</title>
 </head>
 <body>
-<div>
+<div class="container">
   <h1>Список Станций</h1>
   <table>
     <thead>
@@ -18,17 +18,15 @@
     </thead>
     <tbody>
     <tr th:each="station: ${stations}">
-      <td><a th:href="@{/station/{id}/update(id=${station.stationId})}" th:text="${station.stationName}">stationName</a></td>
+      <td><a th:href="@{/station/{id}(id=${station.stationId})}" th:text="${station.stationName}">stationName</a></td>
       <td th:text="${station.address}">address</td>
       <td th:text="${station.stationState}">stationState</td>
     </tr>
     </tbody>
   </table>
-  <div>
-    <form th:action="@{/}" th:method="get">
-      <button>На главную страницу</button>
-    </form>
-  </div>
+  <form class="form" th:action="@{/}" th:method="get">
+    <button class="btn btn-lg btn-primary btn-block">На главную страницу</button>
+  </form>
 </div>
 </body>
 </html>
