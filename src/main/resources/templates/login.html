@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <meta charset="UTF-8">
+  <title>Сеть ЭЗС</title>
+</head>
+<body>
+<div class="container">
+  <h1>Страница входа</h1>
+  <form class="form" th:action="@{/login}" method="post">
+    <table>
+      <tbody>
+      <tr>
+        <th>Логин</th>
+        <td><input type="text" th:name="username" placeholder="Логин" minlength="4"
+                   required="required"></td>
+      </tr>
+      <tr>
+        <th>Пароль</th>
+        <td><input type="text" th:name="password" placeholder="Пароль" minlength="4"
+                   required="required"></td>
+      </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-lg btn-primary btn-block">Войти</button>
+    <br/>
+  </form>
+</div>
+</body>
+</html>

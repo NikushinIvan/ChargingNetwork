@@ -88,6 +88,7 @@ public class SecurityConfig {
                     .antMatchers(GET, "/").authenticated()
                     .anyRequest().denyAll().and()
                 .formLogin()
+                    .loginPage("/login").permitAll()
                     .defaultSuccessUrl("/").and()
                 .build();
     }
